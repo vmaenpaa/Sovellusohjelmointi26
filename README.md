@@ -1,5 +1,5 @@
 My exercise progress tracker app layout.
-
+  
 ## Create python venv and install requirements
 
 1. Go to backend folder
@@ -19,12 +19,12 @@ python3 -m venv .venv
 ```
 
 3. Activate venv
-# Windows:
+### Windows:
 ```bash
 .\.venv\Scripts\Activate.ps1
 ```
 
-# Linux/Mac
+### Linux/Mac
 ```bash
 source .venv/bin/activate
 ```
@@ -34,6 +34,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+  
 ## Starting app locally
 
 1. Run command:
