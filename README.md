@@ -1,5 +1,5 @@
 My exercise progress tracker app layout.
-  
+
 <br>
 
 ## Create python venv and install requirements
@@ -21,12 +21,13 @@ python3 -m venv .venv
 ```
 
 3. Activate venv
-### Windows:
+
+**Windows**:
 ```bash
 .\.venv\Scripts\Activate.ps1
 ```
 
-### Linux/Mac
+**Linux/Mac**
 ```bash
 source .venv/bin/activate
 ```
@@ -38,7 +39,6 @@ pip install -r requirements.txt
 
 <br>
 
-  
 ## Starting app locally
 
 1. Run command:
@@ -49,12 +49,12 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 <br>
 
-##Starting docker
+## Starting docker
 
 ```bash
 docker compose up --build
 ```
 
-###Ports:
-Postgres: 5432 
-API: 8000
+### Ports:
+**Postgres**: 5432 
+**API**: 8000
