@@ -1,5 +1,7 @@
 My exercise progress tracker app layout.
   
+<br>
+
 ## Create python venv and install requirements
 
 1. Go to backend folder
@@ -34,6 +36,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+<br>
+
   
 ## Starting app locally
 
@@ -43,4 +47,14 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+<br>
 
+##Starting docker
+
+```bash
+docker compose up --build
+```
+
+###Ports:
+Postgres: 5432 
+API: 8000
