@@ -18,6 +18,7 @@ services:
 
     api:
       build: ./backend
+      env_file: .env
       ports:
         - "${API_PORT}:8000"
       depends_on:
