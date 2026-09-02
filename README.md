@@ -43,8 +43,18 @@ pip install -r requirements.txt
 
 1. Run command:
 
+API (inside backend/):
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Web (inside frontend/):
+```bash
+npm install
+```
+And then: 
+```bash
+npm run dev
 ```
 
 <br>
@@ -58,3 +68,4 @@ docker compose up --build
 ### Ports:
 **Postgres**: 5432 
 **API**: 8000
+**Frontend**: 5173
