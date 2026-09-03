@@ -1,71 +1,123 @@
-My exercise progress tracker app layout.
+My exercise progress tracker app.
 
+## Installing and running app
+
+Before installing, make sure you have following installed: 
+
+###
+
+- Node.js
+- Docker
+- Git
+- Python 
+
+**With docker**
+1. Copy .env.example to .env
+2. Run 
+```bash
+docker compose up --build
+```
 <br>
 
-## Create python venv and install requirements
+**Or without docker**
 
-1. Go to backend folder
+1. Create python venv and install requirements
 ```bash
+# Go to backend folder
 cd backend
-```
 
-2. install python virtual environment
-```bash
-python -m venv .venv
-```
-
-or
-
-```bash
+#install python virtual environment
 python3 -m venv .venv
 ```
 
-3. Activate venv
+2. Activate venv
 
-**Windows**:
+Windows:
 ```bash
 .\.venv\Scripts\Activate.ps1
 ```
 
-**Linux/Mac**
+Linux/Mac:
 ```bash
 source .venv/bin/activate
 ```
 
-4. Install requirements
+3. Install requirements
 ```bash
 pip install -r requirements.txt
 ```
 
 <br>
 
-## Starting app locally
+**Starting app locally**
 
 1. Run command:
 
-API (inside backend/):
+API:
 ```bash
+#Go to backend folder
+cd backend
+
+#Start backend
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Web (inside frontend/):
+Web:
 ```bash
+#Go to frontend folder
+cd frontend
+
+#Install dependencies
 npm install
-```
-And then: 
-```bash
+
+#Run backend
 npm run dev
 ```
 
 <br>
 
-## Starting docker
+**Ports**:
+- **Postgres**: 5432 
+- **API**: 8000
+- **Frontend**: 5173
+
+<br>
+
+## URLS
+
+**API URLs:**
+| URL          | Explanation    |
+| -------------|---------       |
+| /docs        | documents      |
+| /health      |                |
+
+
+**Frontend URLs:**
+| URL          | Explanation    |
+| -------------|---------       |
+| /            | Landing page to test if api /health works      |
+
+
+
+## Troubleshooting
+
+**Port in use**
+
+If port 5432, 8000, or 5173 is already in use, stop the application using it or change the corresponding port in the configuration before restarting Docker Compose.
+
+**Postgres not ready**
+
+Check the database status and logs:
 
 ```bash
-docker compose up --build
+docker compose ps
+docker compose logs db
 ```
 
-### Ports:
-**Postgres**: 5432 
-**API**: 8000
-**Frontend**: 5173
+**Forgotten .env**
+
+Make sure you have copied .env.example to .env in root folder and in /frontend.
+
+## Links
+
+[Docs README.md](docs/sprints/README.md).
