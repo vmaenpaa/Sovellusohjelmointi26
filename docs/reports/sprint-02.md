@@ -35,7 +35,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-02 — User model (Must)
 
-- **Status:**
+- **Status:** 
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Prefer `/admin` after env-based SQLAdmin login showing the Users (or `user`) table. If `/admin` is not ready yet, show the Alembic migration file (or `alembic history`) listing the `user` table create.
