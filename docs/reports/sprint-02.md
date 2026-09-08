@@ -30,13 +30,13 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-01 — SQLAlchemy engine, session, and Base (Must)
 
 - **Status:** Done / deferred (why): Done
-- **PR / commit:** S2-01: Added SQLAlchemy engine and made a session for it. Also added base in db/base.py
+- **PR / commit:** S2-01: Added SQLAlchemy engine and made a session for it. Also added base in db/base.py / 3c0d1db
 - **Used AI?** Yes 
 
 ### S2-02 — User model (Must)
 
-- **Status:** 
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** S2-02: Added user model and made table for users. / 955a7b4
 - **Demonstration:**
   1. **Do this:** Prefer `/admin` after env-based SQLAdmin login showing the Users (or `user`) table. If `/admin` is not ready yet, show the Alembic migration file (or `alembic history`) listing the `user` table create.
   2. **Capture:** Screenshot of `/admin` Users list or the migration/editor view of the `user` table.
