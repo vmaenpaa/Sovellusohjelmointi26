@@ -17,6 +17,11 @@ Before installing, make sure you have following installed:
 ```bash
 docker compose up --build
 ```
+3. Run 
+```bash
+docker compose exec api alembic upgrade head
+```
+
 <br>
 
 **Or without docker**
@@ -60,6 +65,9 @@ cd backend
 
 #Start backend
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+#After that run also
+alembic upgrade head
 ```
 
 Web:
