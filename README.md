@@ -20,6 +20,9 @@ docker compose up --build
 3. Run 
 ```bash
 docker compose exec api alembic upgrade head
+
+# Seed system units and activity types
+docker compose exec api python -m app.db.init_db
 ```
 
 <br>

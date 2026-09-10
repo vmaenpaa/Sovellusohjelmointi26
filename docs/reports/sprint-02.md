@@ -44,11 +44,11 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   4. **Must not show:** Password hashes, SQLAdmin password fields filled in, or JWT tokens.
   5. **Save as:** `docs/reports/images/sprint-02/s2-02-user.png`
   6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-03 — ActivityType model (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open `/admin` activity types view, or show activity types in `/docs` if you already expose a list endpoint.
@@ -57,11 +57,11 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   4. **Must not show:** Secrets or unrelated user password data.
   5. **Save as:** `docs/reports/images/sprint-02/s2-03-activity-types.png`
   6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-04 — UnitType model and activity links (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/admin`, open unit types and the activity↔unit link (or activity detail) so Running → duration + distance (or your equivalent pair) is visible.
@@ -70,12 +70,12 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   4. **Must not show:** SQLAdmin credentials in the shot.
   5. **Save as:** `docs/reports/images/sprint-02/s2-04-unit-links.png`
   6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-05 — Alembic setup and initial migration (Must)
 
-- **Status:**
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** 
 - **Demonstration:**
   1. **Do this:** Either (a) show `alembic upgrade head` succeeding in the terminal, (b) open the initial migration file in the editor, or (c) after a fresh Compose migrate, show tables present in `/admin` or `psql` `\dt`.
   2. **Capture:** Screenshot of one of those proofs.
@@ -83,11 +83,11 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   4. **Must not show:** Database passwords in the command line history.
   5. **Save as:** `docs/reports/images/sprint-02/s2-05-alembic.png`
   6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-06 — Seed system catalog (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** After seed runs (startup or documented command), open `/admin` and browse unit types and activity types (and links if shown).
@@ -96,7 +96,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   4. **Must not show:** Admin password typed into a form in clear text if avoidable.
   5. **Save as:** `docs/reports/images/sprint-02/s2-06-seed.png`
   6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-07 — SQLAdmin UI for Postgres (Must)
 
