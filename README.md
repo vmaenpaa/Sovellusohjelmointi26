@@ -92,6 +92,16 @@ npm run dev
 - **API**: 8000
 - **Frontend**: 5173
 
+## Admin
+
+SQLAdmin is available at `http://localhost:8000/admin`. Configure its separate login in the root `.env` file:
+
+```env
+SQLADMIN_SECRET_KEY=replace-with-a-long-random-secret
+SQLADMIN_USERNAME=admin
+SQLADMIN_PASSWORD=change-this-password
+```
+
 <br>
 
 ## URLS

@@ -29,6 +29,9 @@ services:
         API_HOST: ${API_HOST}
         API_PORT: ${API_PORT}
         CORS_ORIGINS: ${CORS_ORIGINS}
+        SQLADMIN_SECRET_KEY: ${SQLADMIN_SECRET_KEY}
+        SQLADMIN_USERNAME: ${SQLADMIN_USERNAME}
+        SQLADMIN_PASSWORD: ${SQLADMIN_PASSWORD}
 
     web:
       build: ./frontend

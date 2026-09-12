@@ -11,3 +11,6 @@ class Settings(BaseSettings):
     api_host: str
     api_port: int
     cors_origins: str
+    sqladmin_secret_key: str
+    sqladmin_username: str
+    sqladmin_password: str
