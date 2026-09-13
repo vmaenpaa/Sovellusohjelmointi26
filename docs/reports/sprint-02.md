@@ -43,79 +43,79 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Proof a `user` (or Users) table exists in the schema or admin UI.
   4. **Must not show:** Password hashes, SQLAdmin password fields filled in, or JWT tokens.
   5. **Save as:** `docs/reports/images/sprint-02/s2-02-user.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Made user model for backend and added table, so it is ready for new users to be added.
 - **Used AI?** Yes
 
 ### S2-03 — ActivityType model (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 7b87167
 - **Demonstration:**
   1. **Do this:** Open `/admin` activity types view, or show activity types in `/docs` if you already expose a list endpoint.
   2. **Capture:** Screenshot of activity types listed.
   3. **Must show:** At least one activity type row (name/slug visible) in `/admin` or `/docs`.
   4. **Must not show:** Secrets or unrelated user password data.
   5. **Save as:** `docs/reports/images/sprint-02/s2-03-activity-types.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Added model and table for different activity types.
 - **Used AI?** Yes
 
 ### S2-04 — UnitType model and activity links (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 2a460e9
 - **Demonstration:**
   1. **Do this:** In `/admin`, open unit types and the activity↔unit link (or activity detail) so Running → duration + distance (or your equivalent pair) is visible.
   2. **Capture:** Screenshot showing Running (or one activity) linked to at least two unit types such as duration and distance.
   3. **Must show:** The M:N link clearly (activity + allowed units), not only an empty units list.
   4. **Must not show:** SQLAdmin credentials in the shot.
   5. **Save as:** `docs/reports/images/sprint-02/s2-04-unit-links.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Running (activity_type_id 1) is linked to duration (unit_type_id 1) and distance (unit_type_id 2).
 - **Used AI?** Yes
 
 ### S2-05 — Alembic setup and initial migration (Must)
 
 - **Status:** Done
-- **PR / commit:** 
+- **PR / commit:** d2a351e
 - **Demonstration:**
   1. **Do this:** Either (a) show `alembic upgrade head` succeeding in the terminal, (b) open the initial migration file in the editor, or (c) after a fresh Compose migrate, show tables present in `/admin` or `psql` `\dt`.
   2. **Capture:** Screenshot of one of those proofs.
   3. **Must show:** Migration tooling in use and schema applied (command success, migration file, or tables after upgrade).
   4. **Must not show:** Database passwords in the command line history.
   5. **Save as:** `docs/reports/images/sprint-02/s2-05-alembic.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Alembic setup.
 - **Used AI?** Yes
 
 ### S2-06 — Seed system catalog (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 0f21e33
 - **Demonstration:**
   1. **Do this:** After seed runs (startup or documented command), open `/admin` and browse unit types and activity types (and links if shown).
   2. **Capture:** Screenshot of seeded units and activities (enough rows to prove the catalog, for example six activities and four units).
   3. **Must show:** Seeded catalog data present—not empty tables after seed.
   4. **Must not show:** Admin password typed into a form in clear text if avoidable.
   5. **Save as:** `docs/reports/images/sprint-02/s2-06-seed.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Seeded values for unit and activity types.
 - **Used AI?** Yes
 
 ### S2-07 — SQLAdmin UI for Postgres (Must)
 
-- **Status:**
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** 2f1efd4
 - **Demonstration:**
   1. **Do this:** Open `http://localhost:8000/admin` (or your documented URL). Log in with **SQLAdmin env credentials** (not the app JWT Login page). Land on the admin home or a model list.
   2. **Capture:** Screenshot of `/admin` after successful env login.
   3. **Must show:** SQLAdmin UI loaded and authenticated; URL includes `/admin`.
   4. **Must not show:** The password you typed; crop the login form after submit if the password field is still visible. Do not show JWT Bearer tokens—this login is separate from app auth.
   5. **Save as:** `docs/reports/images/sprint-02/s2-07-admin.png`
-  6. **Caption (1–2 sentences):**
+  6. **Caption (1–2 sentences):** Added login with env credentials to SQLAdmin.
 - **Used AI?** Yes / No
 
 ### S2-08 — Password hashing helpers (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S2-09 — JWT helpers and current user (Must)
 
