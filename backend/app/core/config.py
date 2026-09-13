@@ -14,3 +14,5 @@ class Settings(BaseSettings):
     sqladmin_secret_key: str
     sqladmin_username: str
     sqladmin_password: str
+    jwt_secret: str
+    access_token_expire_minutes: int
