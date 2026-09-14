@@ -126,7 +126,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-10 — Register endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 
 - **Demonstration:**
   1. **Do this:** In `/docs`, run `POST /auth/register` with a new email and password. Confirm HTTP 201 (or your documented success).
   2. **Capture:** Screenshot of the `/docs` request/response for register.
