@@ -110,7 +110,8 @@ SQLADMIN_PASSWORD=change-this-password
 | URL          | Explanation    |
 | -------------|---------       |
 | /docs        | documents      |
-| /health      |                |
+| /health      | health check   |
+| /auth/register | Register a user and return the public user plus a bearer access token |
 
 
 **Frontend URLs:**

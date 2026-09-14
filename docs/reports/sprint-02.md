@@ -114,18 +114,18 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-08 — Password hashing helpers (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 2558181
 - **Used AI?** Yes
 
 ### S2-09 — JWT helpers and current user (Must)
 
-- **Status:**
-- **PR / commit:**
-- **Used AI?** Yes / No
+- **Status:** Done
+- **PR / commit:** 3b503c6
+- **Used AI?** Yes
 
 ### S2-10 — Register endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/docs`, run `POST /auth/register` with a new email and password. Confirm HTTP 201 (or your documented success).
@@ -133,8 +133,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Successful register response (201) and that a user was created (response body without password).
   4. **Must not show:** The password value in the request body—crop or blank it before saving.
   5. **Save as:** `docs/reports/images/sprint-02/s2-10-register.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made pydantic schema for register body and response body for public user. Added router for registeration, that returns public user fields and also access token.
+- **Used AI?** Yes 
 
 ### S2-11 — Login endpoint (Must)
 
