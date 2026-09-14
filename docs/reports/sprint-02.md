@@ -126,7 +126,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-10 — Register endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:** 
+- **PR / commit:** d42d94a
 - **Demonstration:**
   1. **Do this:** In `/docs`, run `POST /auth/register` with a new email and password. Confirm HTTP 201 (or your documented success).
   2. **Capture:** Screenshot of the `/docs` request/response for register.
@@ -138,7 +138,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-11 — Login endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/docs`, run `POST /auth/login` with a valid user. Confirm a token field is present in the response.
@@ -146,8 +146,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Successful login and evidence a token was returned (you may blur/crop the token **value**).
   4. **Must not show:** The full JWT string pasted into the report or left readable in the image. Never paste the token into the Markdown.
   5. **Save as:** `docs/reports/images/sprint-02/s2-11-login.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made pydantic schema for login body and login router. 
+- **Used AI?** Yes
 
 ### S2-12 — Me endpoint (Must)
 

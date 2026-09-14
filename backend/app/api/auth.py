@@ -3,8 +3,13 @@ from sqlalchemy.orm import Session
 
 from app.core.security import create_access_token
 from app.db.session import get_db
-from app.schemas.auth import AuthResponse, UserCreate, UserPublic
-from app.services.auth import DuplicateEmailError, register_user
+from app.schemas.auth import AuthResponse, LoginRequest, TokenResponse, UserCreate, UserPublic
+from app.services.auth import (
+	DuplicateEmailError,
+	InvalidCredentialsError,
+	login_user,
+	register_user,
+)
 
 
 router = APIRouter(prefix="/auth")
@@ -40,3 +45,14 @@ def register(user_data: UserCreate, db: Session = Depends(get_db)) -> AuthRespon
 		user=public_user,
 		access_token=create_access_token(user.id),
 	)
+
+
+@router.post("/login", response_model=TokenResponse, tags=["auth"])
+def login(user_data: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse:
+	try:
+		return login_user(db, user_data)
+	except InvalidCredentialsError as error:
+		raise HTTPException(
+			status_code=status.HTTP_401_UNAUTHORIZED,
+			detail=str(error),
+		) from error
