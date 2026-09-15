@@ -152,7 +152,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-12 — Me endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 3c0cff9
 - **Demonstration:**
   1. **Do this:** In `/docs`, authorize with a valid Bearer token (Authorize button). Call `GET /auth/me`. Confirm 200 and your user profile fields.
   2. **Capture:** Screenshot of `/auth/me` response.
@@ -164,7 +164,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-13 — CORS lockdown (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** From the frontend origin, trigger an API call (for example health or `/auth/me`). Open DevTools → Network. Select the API request and open Headers.
@@ -172,8 +172,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** The frontend origin and that the API response allows it (for example `Access-Control-Allow-Origin` matching your Vite origin, or a successful cross-origin call from that origin).
   4. **Must not show:** Authorization Bearer values—collapse or crop that header.
   5. **Save as:** `docs/reports/images/sprint-02/s2-13-cors.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Configured CORSMiddleware and made sure frontend can succesfully fetch from backend.
+- **Used AI?** Yes 
 
 ### S2-14 — Register page (Must)
 

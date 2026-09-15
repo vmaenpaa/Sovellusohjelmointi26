@@ -21,8 +21,9 @@ export default function HomePage() {
   return (
     <div className="homepage">
       <div className="homepage-card">
+
         <button className="homepage-button" onClick={handleTest}>
-          Test
+          Check health
         </button>
 
         <div

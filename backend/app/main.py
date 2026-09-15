@@ -7,18 +7,19 @@ from starlette.middleware.sessions import SessionMiddleware
 from .admin import setup_admin
 from .api.auth import router as auth_router
 from .api.health import router as health_router
+from .core.config import Settings
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",]
+settings = Settings()
+origins = [origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_credentials=False,
+    allow_methods=["POST", "GET", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
 )
 
 app.include_router(health_router)
