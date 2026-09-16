@@ -178,7 +178,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-14 — Register page (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** e3ec88c
 - **Demonstration:**
   1. **Do this:** Open the Register page in the SPA. Optionally submit once with a test user, then crop any password fields.
   2. **Capture:** Screenshot of the Register UI.
@@ -190,7 +190,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-15 — Login page and token storage (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open the Login page. Log in successfully so the app stores the JWT in `localStorage` (do not open Application → Local Storage for the screenshot if the token value is visible).
@@ -198,8 +198,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Login page UI for the SPA.
   4. **Must not show:** `localStorage` panel with a readable JWT, or password fields filled in.
   5. **Save as:** `docs/reports/images/sprint-02/s2-15-login-ui.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made login page, that saves JWT token to localStorage.
+- **Used AI?** Yes
 
 ### S2-16 — Protected layout (Must)
 

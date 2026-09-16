@@ -33,6 +33,14 @@
   background: #1f2937;
 }
 
+.homepage-logout-button {
+  background: #b91c1c;
+}
+
+.homepage-logout-button:hover {
+  background: #991b1b;
+}
+
 .homepage-status {
   min-height: 24px;
   font-size: 18px;
