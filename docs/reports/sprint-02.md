@@ -165,7 +165,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-13 — CORS lockdown (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 82ef424
 - **Demonstration:**
   1. **Do this:** From the frontend origin, trigger an API call (for example health or `/auth/me`). Open DevTools → Network. Select the API request and open Headers.
   2. **Capture:** Screenshot of the request/response headers showing the allowed origin behavior for your SPA origin.
@@ -177,7 +177,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-14 — Register page (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open the Register page in the SPA. Optionally submit once with a test user, then crop any password fields.
@@ -185,8 +185,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Register form (email/password fields visible as UI chrome, not filled secrets).
   4. **Must not show:** Typed passwords or confirmation codes.
   5. **Save as:** `docs/reports/images/sprint-02/s2-14-register-ui.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made register page, that sends information to backend.
+- **Used AI?** Yes
 
 ### S2-15 — Login page and token storage (Must)
 

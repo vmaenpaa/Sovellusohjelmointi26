@@ -140,6 +140,10 @@ docker compose logs db
 
 Make sure you have copied .env.example to .env in root folder and in /frontend.
 
+## Note to self
+
+1. /register navigates to /login, does not auto-login.
+
 ## Links
 
 [Docs README.md](docs/sprints/README.md).
