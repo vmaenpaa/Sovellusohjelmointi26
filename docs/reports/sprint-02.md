@@ -191,7 +191,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-15 — Login page and token storage (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 382d66e
 - **Demonstration:**
   1. **Do this:** Open the Login page. Log in successfully so the app stores the JWT in `localStorage` (do not open Application → Local Storage for the screenshot if the token value is visible).
   2. **Capture:** Screenshot of the Login UI (before or after login, without exposing the token value).
@@ -203,7 +203,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-16 — Protected layout (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** While logged out, open a gated route (for example Dashboard or Settings). Confirm you are redirected or blocked. Then log in and open the same route; confirm the protected layout appears.
@@ -211,8 +211,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Logged-out user cannot stay on the gated page; logged-in user sees the protected shell.
   4. **Must not show:** Tokens in the URL or DevTools.
   5. **Save as:** `docs/reports/images/sprint-02/s2-16-protected.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made protected route, if localstorage has no access-token, it redirects to /login.
+- **Used AI?** Yes
 
 ### S2-17 — User display and logout (Must)
 
