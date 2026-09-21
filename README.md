@@ -92,14 +92,32 @@ npm run dev
 - **API**: 8000
 - **Frontend**: 5173
 
-## Admin
+## .env variables
 
-SQLAdmin is available at `http://localhost:8000/admin`. Configure its separate login in the root `.env` file:
+**SQLADMIN**
+
+SQLAdmin is available at `http://localhost:8000/admin`. Configure its separate login (NOT JWT!) in the root `.env` file:
 
 ```env
 SQLADMIN_SECRET_KEY=replace-with-a-long-random-secret
 SQLADMIN_USERNAME=admin
 SQLADMIN_PASSWORD=change-this-password
+```
+**CORS**
+
+Remember to add your frontend to `.env`:
+
+```env
+CORS origin=
+```
+
+**JWT/SECRET**
+
+Make sure to also add JWT token and expire time to `.env`: 
+
+```env
+JWT_SECRET=
+ACCESS_TOKEN_EXPIRE_MINUTES=
 ```
 
 <br>
@@ -112,6 +130,7 @@ SQLADMIN_PASSWORD=change-this-password
 | /docs        | documents      |
 | /health      | health check   |
 | /auth/register | Register a user and return the public user plus a bearer access token |
+| /admin | SQLAdmin page. After running ```alembic upgrade head``` you should see all the seeded unit/activity catalog ([As shown here](/docs/sprints/tickets/sprint-02-tickets.md)).|
 
 
 **Frontend URLs:**
@@ -119,6 +138,11 @@ SQLADMIN_PASSWORD=change-this-password
 | -------------|---------       |
 | /            | Landing page to test if api /health works      |
 
+## Creating first user
+
+1. Head over to ```/register```
+2. Fill in username, email and password.
+3. After creating user you are redirected to ```/login``` and you can use your information to login.
 
 
 ## Troubleshooting

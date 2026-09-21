@@ -217,7 +217,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-17 — User display and logout (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 366a913
 - **Demonstration:**
   1. **Do this:** While logged in, show the header or Settings with the current user identity. Then log out and show the post-logout state (login page or cleared header).
   2. **Capture:** Two screenshots (before and after logout).
@@ -229,16 +229,16 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-18 — Auth + SQLAdmin README notes (Should)
 
-- **Status:**
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** "S2-18: Updated README.MD. Added register instructions and .env credentials helper"
 - **Demonstration:**
   1. **Do this:** Open the README section that documents auth (register/login) and `/admin` (env credentials, separate from JWT).
   2. **Capture:** Screenshot of that README section.
   3. **Must show:** Auth and SQLAdmin documented (URLs / purpose; placeholder credentials only if they match `.env.example`, not production secrets).
   4. **Must not show:** Real production passwords.
   5. **Save as:** `docs/reports/images/sprint-02/s2-18-readme.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Updated my README file, so that it tells you how to register new user, what .env credentials to fill and added /admin page.
+- **Used AI?** No
 
 ### Stretch (only if you did them)
 
