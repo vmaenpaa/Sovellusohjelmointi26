@@ -1,0 +1,71 @@
+.app-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  font-family: Arial, sans-serif;
+}
+
+.app-header-user {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-header-label {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.app-header-user strong {
+  overflow: hidden;
+  color: #111827;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-header-logout {
+  flex-shrink: 0;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #fff1f2;
+  color: #b91c1c;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.app-header-logout:hover {
+  border-color: #fca5a5;
+  background: #fee2e2;
+}
+
+.app-header-logout:focus-visible {
+  outline: 2px solid #111827;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 14px 16px;
+  }
+
+  .app-header-user {
+    display: block;
+  }
+
+  .app-header-label {
+    display: block;
+    margin-bottom: 2px;
+  }
+}

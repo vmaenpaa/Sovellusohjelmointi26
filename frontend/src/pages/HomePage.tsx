@@ -1,17 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { apiFetch } from "../api/client";
-import { clearToken } from "../auth/token";
 import "./HomePage.css";
 
 export default function HomePage() {
-  const navigate = useNavigate();
   const [status, setStatus] = useState<"loading" | "ok" | "not-ok">("loading");
-
-  const handleLogout = () => {
-    clearToken();
-    navigate("/login");
-  };
 
   const handleTest = async () => {
     setStatus("loading");
@@ -32,10 +24,6 @@ export default function HomePage() {
 
         <button className="homepage-button" onClick={handleTest}>
           Check health
-        </button>
-
-        <button className="homepage-button homepage-logout-button" onClick={handleLogout}>
-          Log out
         </button>
 
         <div

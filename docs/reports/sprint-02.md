@@ -204,7 +204,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S2-16 — Protected layout (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 292aa8a
 - **Demonstration:**
   1. **Do this:** While logged out, open a gated route (for example Dashboard or Settings). Confirm you are redirected or blocked. Then log in and open the same route; confirm the protected layout appears.
   2. **Capture:** Two screenshots (logged-out bounce + logged-in layout) or one collage.
@@ -216,7 +216,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S2-17 — User display and logout (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** While logged in, show the header or Settings with the current user identity. Then log out and show the post-logout state (login page or cleared header).
@@ -224,8 +224,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** User identity visible when logged in; after logout the user is gone from the chrome and protected content is inaccessible.
   4. **Must not show:** Tokens or password fields.
   5. **Save as:** `docs/reports/images/sprint-02/s2-17-logout.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made a header, that shows username when logged in. 
+- **Used AI?** Yes
 
 ### S2-18 — Auth + SQLAdmin README notes (Should)
 

@@ -1,11 +1,27 @@
 import { useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet, useNavigate } from "react-router";
 import { apiFetch } from "../api/client";
+import Header from "../components/Header";
 import { clearToken, getToken } from "./token";
+
+export type AuthenticatedUser = {
+	id: number;
+	email: string;
+	display_name: string;
+};
 
 export default function ProtectedRoute() {
 	const token = getToken();
+	const navigate = useNavigate();
 	const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+	const [user, setUser] = useState<AuthenticatedUser | null>(null);
+
+	const handleLogout = () => {
+		clearToken();
+		setUser(null);
+		setAuthenticated(false);
+		navigate("/login", { replace: true });
+	};
 
 	useEffect(() => {
 		if (!token) {
@@ -22,12 +38,21 @@ export default function ProtectedRoute() {
 
 				if (response.status === 401) {
 					clearToken();
+					setUser(null);
 					setAuthenticated(false);
+					navigate("/login", { replace: true });
 					return;
 				}
 
 				if (response.ok) {
-					setAuthenticated(true);
+					response.json().then((data: AuthenticatedUser) => {
+						if (cancelled) {
+							return;
+						}
+
+						setUser(data);
+						setAuthenticated(true);
+					});
 				}
 			})
 			.catch(() => undefined);
@@ -35,7 +60,7 @@ export default function ProtectedRoute() {
 		return () => {
 			cancelled = true;
 		};
-	}, [token]);
+	}, [navigate, token]);
 
 	if (!token) {
 		clearToken();
@@ -50,5 +75,10 @@ export default function ProtectedRoute() {
 		return null;
 	}
 
-	return <Outlet />;
+	return (
+		<>
+			<Header user={user} onLogout={handleLogout} />
+			<Outlet />
+		</>
+	);
 }
