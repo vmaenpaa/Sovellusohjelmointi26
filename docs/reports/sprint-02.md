@@ -296,15 +296,15 @@ Sprint 2 is **three weeks**.
 
 Two to four technical choices with why (for example JWT library, CORS origin, what you store in `localStorage`).
 
-1.
-2.
+1. I decided that register returns only the public user and does not auto login.
+2. for JWT library i used PyJWT.
 
 ## What we learned
 
 Note what you actually used. Tools this sprint: SQLAlchemy, Alembic, psycopg, SQLAdmin, bcrypt (or passlib), JWT, FastAPI security (`HTTPBearer`), CORSMiddleware, `localStorage`.
 
-- What clicked:
-- One thing you would do differently:
+- What clicked: I managed to get hang of how the database is starting to build.
+- One thing you would do differently: 
 
 ## Carry-over
 
@@ -318,12 +318,12 @@ Here, cover your **overall** AI use during this sprint (Cursor, ChatGPT, Copilot
 
 If you marked **No** on every ticket, write a short note that you did not use AI coding assistants this sprint (you may still answer verification / independence questions briefly).
 
-- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump):
-- **What I typically accepted from AI suggestions:**
-- **What I typically rejected or reworked, and why:**
-- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews):
-- **What I can now explain or do independently** that I relied on AI for earlier:
-- **Anything I would do differently with AI next sprint:**
+- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump): AI helped me most with building the AcitivityType and UnitType models and links between those.
+- **What I typically accepted from AI suggestions:** Frontend suggestions.
+- **What I typically rejected or reworked, and why:** Endpoints had to be reworked.
+- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews): I tested manually after every change.
+- **What I can now explain or do independently** that I relied on AI for earlier: Building the database models
+- **Anything I would do differently with AI next sprint:** 
 
 Do not paste secrets, full JWTs, or `.env` values.
 
