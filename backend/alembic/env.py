@@ -12,6 +12,8 @@ from app.models import (
     UnitType,
     ActivityTypeUnitType,
     Goal,
+    WorkoutPlan,
+    WorkoutSession,
 )
 
 from alembic import context

@@ -8,6 +8,7 @@ from app.db.base import Base
 
 if TYPE_CHECKING:
     from .user import User
+    from .workout_plan import WorkoutPlan
     from .workout_session_item import WorkoutSessionItem
 
 
@@ -28,11 +29,20 @@ class WorkoutSession(Base):
             "user_id",
             "session_at",
         ),
+        Index(
+            "ix_workout_sessions_plan_id_session_at",
+            "plan_id",
+            "session_at",
+        ),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"),
+    )
+    plan_id: Mapped[int | None] = mapped_column(
+        ForeignKey("workout_plans.id", ondelete="SET NULL"),
+        nullable=True,
     )
     name: Mapped[str]
     session_at: Mapped[datetime | None] = mapped_column(
@@ -50,6 +60,9 @@ class WorkoutSession(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
     user: Mapped["User"] = relationship()
+    plan: Mapped["WorkoutPlan | None"] = relationship(
+        back_populates="sessions",
+    )
     items: Mapped[list["WorkoutSessionItem"]] = relationship(
         back_populates="session",
         cascade="all, delete-orphan",
