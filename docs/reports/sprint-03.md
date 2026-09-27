@@ -30,14 +30,14 @@ Skip stretch tickets you did not do.
 ### S3-01 — Session models and migration (Must)
 
 - **Status:** Done:
-- **PR / commit:** 
+- **PR / commit:** 9221d8b
 - **Used AI?** Yes 
 
 ### S3-02 — Goal model and migration (Must)
 
-- **Status:** Done / deferred (why):
-- **PR / commit:**
-- **Used AI?** Yes / No
+- **Status:**: Done
+- **PR / commit:** 
+- **Used AI?** Yes
 
 ### S3-03 — Plan model and migration (Must)
 

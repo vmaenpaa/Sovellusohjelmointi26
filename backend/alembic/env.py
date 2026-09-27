@@ -11,6 +11,7 @@ from app.models import (
     ActivityType,
     UnitType,
     ActivityTypeUnitType,
+    Goal,
 )
 
 from alembic import context
