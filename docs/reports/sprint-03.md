@@ -42,12 +42,12 @@ Skip stretch tickets you did not do.
 ### S3-03 — Plan model and migration (Must)
 
 - **Status:** Done
-- **PR / commit:** 
+- **PR / commit:** 24e3662
 - **Used AI?** Yes
 
 ### S3-04 — Sessions CRUD API (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/docs`, authorize, create a session, list sessions.
@@ -55,8 +55,8 @@ Skip stretch tickets you did not do.
   3. **Must show:** Session owned by the authenticated user.
   4. **Must not show:** Full Bearer token.
   5. **Save as:** `docs/reports/images/sprint-03/s3-04-sessions-crud.png`
-  6. **Caption:**
-- **Used AI?** Yes / No
+  6. **Caption:** Made CRUD functions to API. 
+- **Used AI?** Yes 
 
 ### S3-05 — Session measurements planned and actual (Must)
 
