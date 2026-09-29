@@ -7,6 +7,7 @@ from app.models.user import User
 from app.schemas.session import SessionCreate, SessionRead, SessionUpdate
 from app.services.sessions import (
 	PlanNotFoundError,
+	SessionItemValidationError,
 	SessionNotFoundError,
 	create_session,
 	delete_session,
@@ -22,6 +23,13 @@ router = APIRouter(prefix="/sessions", tags=["sessions"])
 def _not_found(error: ValueError) -> HTTPException:
 	return HTTPException(
 		status_code=status.HTTP_404_NOT_FOUND,
+		detail=str(error),
+	)
+
+
+def _unprocessable_entity(error: ValueError) -> HTTPException:
+	return HTTPException(
+		status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
 		detail=str(error),
 	)
 
@@ -50,6 +58,9 @@ def create_user_session(
 	except PlanNotFoundError as error:
 		db.rollback()
 		raise _not_found(error) from error
+	except SessionItemValidationError as error:
+		db.rollback()
+		raise _unprocessable_entity(error) from error
 	except Exception:
 		db.rollback()
 		raise
@@ -87,6 +98,9 @@ def update_user_session(
 	except (PlanNotFoundError, SessionNotFoundError) as error:
 		db.rollback()
 		raise _not_found(error) from error
+	except SessionItemValidationError as error:
+		db.rollback()
+		raise _unprocessable_entity(error) from error
 	except Exception:
 		db.rollback()
 		raise

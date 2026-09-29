@@ -2,7 +2,13 @@ from datetime import datetime
 from decimal import Decimal
 from enum import Enum
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import (
+	BaseModel,
+	ConfigDict,
+	Field,
+	field_validator,
+	model_validator,
+)
 
 
 class SessionStatus(str, Enum):
@@ -16,6 +22,12 @@ class SessionMeasurementCreate(BaseModel):
 	planned_value: Decimal | None = None
 	actual_value: Decimal | None = None
 	set_index: int | None = Field(default=None, ge=0)
+
+	@model_validator(mode="after")
+	def require_planned_or_actual_value(self):
+		if self.planned_value is None and self.actual_value is None:
+			raise ValueError("At least one of planned_value or actual_value is required")
+		return self
 
 
 class SessionItemCreate(BaseModel):

@@ -48,19 +48,19 @@ Skip stretch tickets you did not do.
 ### S3-04 — Sessions CRUD API (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** dc6dd99
 - **Demonstration:**
   1. **Do this:** In `/docs`, authorize, create a session, list sessions.
   2. **Capture:** Create + list responses.
   3. **Must show:** Session owned by the authenticated user.
   4. **Must not show:** Full Bearer token.
   5. **Save as:** `docs/reports/images/sprint-03/s3-04-sessions-crud.png`
-  6. **Caption:** Made CRUD functions to API. 
+  6. **Caption:** Made CRUD functions to API. Now its possible to create, read, update and delete sessions, if you are logged in.
 - **Used AI?** Yes 
 
 ### S3-05 — Session measurements planned and actual (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Save measurements with `planned_value` and/or `actual_value` using catalog `unit_type_id` (e.g. strength `per_set`).
@@ -68,8 +68,8 @@ Skip stretch tickets you did not do.
   3. **Must show:** Catalog-keyed planned/actual values—not free-text units.
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-03/s3-05-measurements.png`
-  6. **Caption:**
-- **Used AI?** Yes / No
+  6. **Caption:** Added measurement validation, so that session measurements must be linked to its activity.
+- **Used AI?** Yes 
 
 ### S3-06 — Session filters (Must)
 
