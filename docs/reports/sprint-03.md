@@ -61,7 +61,7 @@ Skip stretch tickets you did not do.
 ### S3-05 — Session measurements planned and actual (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** e3b119b
 - **Demonstration:**
   1. **Do this:** Save measurements with `planned_value` and/or `actual_value` using catalog `unit_type_id` (e.g. strength `per_set`).
   2. **Capture:** Request/response showing both fields where relevant.
@@ -73,15 +73,15 @@ Skip stretch tickets you did not do.
 
 ### S3-06 — Session filters (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Apply filters (`from`/`to`, status, unscheduled, and/or `plan_id`) in `/docs` or UI.
   2. **Capture:** Filtered result.
   3. **Must show:** List matching filters for the current user only.
   4. **Save as:** `docs/reports/images/sprint-03/s3-06-filters.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Added possibility to filter sessions and documented them in FastAPI. 
+- **Used AI?** Yes
 
 ### S3-07 — Clone session API (Must)
 

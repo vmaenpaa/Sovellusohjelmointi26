@@ -118,8 +118,27 @@ def get_session(
 	return get_by_id(db, user_id, session_id)
 
 
-def list_sessions(db: Session, user_id: int) -> list[WorkoutSession]:
-	return list_for_user(db, user_id)
+def list_sessions(
+	db: Session,
+	user_id: int,
+	*,
+	session_from: datetime | None = None,
+	session_to: datetime | None = None,
+	status: str | None = None,
+	activity_type_id: int | None = None,
+	unscheduled: bool | None = None,
+	plan_id: int | None = None,
+) -> list[WorkoutSession]:
+	return list_for_user(
+		db,
+		user_id,
+		session_from=session_from,
+		session_to=session_to,
+		status=status,
+		activity_type_id=activity_type_id,
+		unscheduled=unscheduled,
+		plan_id=plan_id,
+	)
 
 
 def update_session(

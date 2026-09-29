@@ -1,10 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from datetime import datetime
+
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_user
 from app.db.session import get_db
 from app.models.user import User
-from app.schemas.session import SessionCreate, SessionRead, SessionUpdate
+from app.schemas.session import (
+	SessionCreate,
+	SessionRead,
+	SessionStatus,
+	SessionUpdate,
+)
 from app.services.sessions import (
 	PlanNotFoundError,
 	SessionItemValidationError,
@@ -36,10 +43,59 @@ def _unprocessable_entity(error: ValueError) -> HTTPException:
 
 @router.get("", response_model=list[SessionRead])
 def list_user_sessions(
+	session_from: datetime | None = Query(
+		default=None,
+		alias="from",
+		description="Include sessions at or after this date and time.",
+	),
+	session_to: datetime | None = Query(
+		default=None,
+		alias="to",
+		description="Include sessions at or before this date and time.",
+	),
+	session_status: SessionStatus | None = Query(
+		default=None,
+		alias="status",
+		description="Filter by exact session status.",
+	),
+	activity_type_id: int | None = Query(
+		default=None,
+		description="Include sessions containing at least one item of this activity type.",
+	),
+	unscheduled: bool | None = Query(
+		default=None,
+		description=(
+			"True selects undated sessions and ignores from/to; false selects "
+			"dated sessions and applies any supplied date bounds."
+		),
+	),
+	plan_id: int | None = Query(
+		default=None,
+		description="Filter by plan ID.",
+	),
 	current_user: User = Depends(get_current_user),
 	db: Session = Depends(get_db),
 ) -> list[SessionRead]:
-	return list_sessions(db, current_user.id)
+	if (
+		session_from is not None
+		and session_to is not None
+		and session_from > session_to
+	):
+		raise HTTPException(
+			status_code=status.HTTP_400_BAD_REQUEST,
+			detail="from must not be after to",
+		)
+
+	return list_sessions(
+		db,
+		current_user.id,
+		session_from=session_from,
+		session_to=session_to,
+		status=session_status.value if session_status is not None else None,
+		activity_type_id=activity_type_id,
+		unscheduled=unscheduled,
+		plan_id=plan_id,
+	)
 
 
 @router.post(
