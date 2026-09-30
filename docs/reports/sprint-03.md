@@ -86,7 +86,7 @@ Skip stretch tickets you did not do.
 ### S3-07 — Clone session API (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 40fb87c
 - **Demonstration:**
   1. **Do this:** Create a source session with planned values. Call `POST /sessions/{id}/clone`. Show clone has planned copied and actuals null/`source_session_id` set. Then edit the source (add an item) and show the clone unchanged.
   2. **Capture:** Clone response + proof of isolation (source vs clone).
@@ -97,15 +97,15 @@ Skip stretch tickets you did not do.
 
 ### S3-08 — Plans CRUD and attach API (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Create a plan; attach a session via `plan_id` (or attach route); list plan members ordered by `session_at`.
   2. **Capture:** Plan detail with members.
   3. **Must show:** Membership via `plan_id`, order by `session_at`—**no** junction table.
   4. **Save as:** `docs/reports/images/sprint-03/s3-08-plans.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Possibility to create plans and attachs sessions to plans. 
+- **Used AI?** Yes
 
 ### S3-09 — Activity types API (Must)
 
