@@ -47,6 +47,12 @@ class SessionCreate(BaseModel):
 	items: list[SessionItemCreate] = Field(default_factory=list)
 
 
+class SessionClone(BaseModel):
+	name: str | None = Field(default=None, min_length=1, max_length=200)
+	session_at: datetime | None = None
+	plan_id: int | None = None
+
+
 class SessionUpdate(BaseModel):
 	name: str | None = Field(default=None, min_length=1, max_length=200)
 	session_at: datetime | None = None
@@ -64,10 +70,14 @@ class SessionUpdate(BaseModel):
 		return value
 
 
-class SessionMeasurementRead(SessionMeasurementCreate):
+class SessionMeasurementRead(BaseModel):
 	model_config = ConfigDict(from_attributes=True)
 
 	id: int
+	unit_type_id: int
+	planned_value: Decimal | None
+	actual_value: Decimal | None
+	set_index: int | None
 
 
 class SessionItemRead(BaseModel):

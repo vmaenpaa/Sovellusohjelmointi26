@@ -7,6 +7,7 @@ from app.core.deps import get_current_user
 from app.db.session import get_db
 from app.models.user import User
 from app.schemas.session import (
+	SessionClone,
 	SessionCreate,
 	SessionRead,
 	SessionStatus,
@@ -16,6 +17,7 @@ from app.services.sessions import (
 	PlanNotFoundError,
 	SessionItemValidationError,
 	SessionNotFoundError,
+	clone_session,
 	create_session,
 	delete_session,
 	get_session,
@@ -117,6 +119,35 @@ def create_user_session(
 	except SessionItemValidationError as error:
 		db.rollback()
 		raise _unprocessable_entity(error) from error
+	except Exception:
+		db.rollback()
+		raise
+
+	return get_session(db, current_user.id, session.id)
+
+
+@router.post(
+	"/{session_id}/clone",
+	response_model=SessionRead,
+	status_code=status.HTTP_201_CREATED,
+)
+def clone_user_session(
+	session_id: int,
+	session_data: SessionClone | None = None,
+	current_user: User = Depends(get_current_user),
+	db: Session = Depends(get_db),
+) -> SessionRead:
+	try:
+		session = clone_session(
+			db,
+			current_user.id,
+			session_id,
+			session_data or SessionClone(),
+		)
+		db.commit()
+	except (PlanNotFoundError, SessionNotFoundError) as error:
+		db.rollback()
+		raise _not_found(error) from error
 	except Exception:
 		db.rollback()
 		raise

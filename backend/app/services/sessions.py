@@ -10,7 +10,7 @@ from app.models.workout_session import WorkoutSession
 from app.models.workout_session_item import WorkoutSessionItem
 from app.models.workout_session_measurement import WorkoutSessionMeasurement
 from app.repositories.session import get_by_id, list_for_user
-from app.schemas.session import SessionUpdate
+from app.schemas.session import SessionClone, SessionUpdate
 
 
 class PlanNotFoundError(ValueError):
@@ -108,6 +108,52 @@ def create_session(
 	db.add(session)
 	db.flush()
 	return session
+
+
+def clone_session(
+	db: Session,
+	user_id: int,
+	session_id: int,
+	session_data: SessionClone,
+) -> WorkoutSession:
+	source = get_session(db, user_id, session_id)
+	if source is None:
+		raise SessionNotFoundError("Session not found")
+
+	_get_owned_plan(db, user_id, session_data.plan_id)
+	now = datetime.now(timezone.utc)
+	clone = WorkoutSession(
+		user_id=user_id,
+		plan_id=session_data.plan_id,
+		name=session_data.name or source.name,
+		session_at=session_data.session_at,
+		status="planned",
+		notes=source.notes,
+		intensity=source.intensity,
+		source_session_id=source.id,
+		created_at=now,
+		updated_at=now,
+	)
+	for source_item in source.items:
+		item = WorkoutSessionItem(
+			activity_type_id=source_item.activity_type_id,
+			sort_order=source_item.sort_order,
+			notes=source_item.notes,
+		)
+		item.measurements = [
+			WorkoutSessionMeasurement(
+				unit_type_id=measurement.unit_type_id,
+				planned_value=measurement.planned_value,
+				actual_value=None,
+				set_index=measurement.set_index,
+			)
+			for measurement in source_item.measurements
+		]
+		clone.items.append(item)
+
+	db.add(clone)
+	db.flush()
+	return clone
 
 
 def get_session(

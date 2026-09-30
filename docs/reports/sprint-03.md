@@ -74,7 +74,7 @@ Skip stretch tickets you did not do.
 ### S3-06 — Session filters (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** f1e470c
 - **Demonstration:**
   1. **Do this:** Apply filters (`from`/`to`, status, unscheduled, and/or `plan_id`) in `/docs` or UI.
   2. **Capture:** Filtered result.
@@ -85,15 +85,15 @@ Skip stretch tickets you did not do.
 
 ### S3-07 — Clone session API (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Create a source session with planned values. Call `POST /sessions/{id}/clone`. Show clone has planned copied and actuals null/`source_session_id` set. Then edit the source (add an item) and show the clone unchanged.
   2. **Capture:** Clone response + proof of isolation (source vs clone).
   3. **Must show:** Snapshot clone + no cascade after source edit.
   4. **Save as:** `docs/reports/images/sprint-03/s3-07-clone.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Possibility to clone own sessions. 
+- **Used AI?** Yes 
 
 ### S3-08 — Plans CRUD and attach API (Must)
 
