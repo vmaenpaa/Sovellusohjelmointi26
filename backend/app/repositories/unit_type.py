@@ -8,6 +8,14 @@ def get_by_slug(db: Session, slug: str) -> UnitType | None:
 	return db.scalar(select(UnitType).where(UnitType.slug == slug))
 
 
+def get_by_ids(db: Session, unit_type_ids: set[int]) -> list[UnitType]:
+    if not unit_type_ids:
+        return []
+    return list(
+        db.scalars(select(UnitType).where(UnitType.id.in_(unit_type_ids))).all()
+    )
+
+
 def get_or_create_system(
 	db: Session,
 	*,

@@ -98,7 +98,7 @@ Skip stretch tickets you did not do.
 ### S3-08 — Plans CRUD and attach API (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** eb8707d
 - **Demonstration:**
   1. **Do this:** Create a plan; attach a session via `plan_id` (or attach route); list plan members ordered by `session_at`.
   2. **Capture:** Plan detail with members.
@@ -109,9 +109,9 @@ Skip stretch tickets you did not do.
 
 ### S3-09 — Activity types API (Must)
 
-- **Status:** Done / deferred (why):
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S3-10 — Goals CRUD API (Must)
 
