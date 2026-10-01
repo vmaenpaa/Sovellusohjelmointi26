@@ -8,6 +8,10 @@ def get_by_slug(db: Session, slug: str) -> UnitType | None:
 	return db.scalar(select(UnitType).where(UnitType.slug == slug))
 
 
+def get_by_id(db: Session, unit_type_id: int) -> UnitType | None:
+	return db.get(UnitType, unit_type_id)
+
+
 def get_by_ids(db: Session, unit_type_ids: set[int]) -> list[UnitType]:
     if not unit_type_ids:
         return []

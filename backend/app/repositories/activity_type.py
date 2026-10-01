@@ -29,6 +29,22 @@ def get_or_create_system(
     return activity_type
 
 
+def get_visible_to_user(
+    db: Session,
+    user_id: int,
+    activity_type_id: int,
+) -> ActivityType | None:
+    return db.scalar(
+        select(ActivityType).where(
+            ActivityType.id == activity_type_id,
+            or_(
+                ActivityType.is_system.is_(True),
+                ActivityType.user_id == user_id,
+            ),
+        )
+    )
+
+
 def list_visible_to_user(db: Session, user_id: int) -> list[ActivityType]:
     statement = (
         select(ActivityType)
