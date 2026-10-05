@@ -140,7 +140,7 @@ Skip stretch tickets you did not do.
 ### S3-12 — Calendar API (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 5401859
 - **Demonstration:**
   1. **Do this:** `GET /calendar?from=&to=` (optional `plan_id`) for dated sessions.
   2. **Capture:** Calendar response.
@@ -151,10 +151,10 @@ Skip stretch tickets you did not do.
 
 ### S3-13 — TanStack Query setup (Must)
 
-- **Status:** Done / deferred (why):
+- **Status:** Done / deferred (why): Done
 - **PR / commit:**
-- **Used AI?** Yes / No
-- **Note your query-key convention**:
+- **Used AI?** Yes
+- **Note your query-key convention**: Sessions => ["sessions", filters], session => ["sessions", "detail", id], plans => ["plans], plan => ["plans", "detail", id], calendar => ["calendar", from, to, plandId (this can be null)], activityTypes => ["activity-types"] and goals => ["goals", active]
 
 ### S3-14 — Sessions list and filters UI (Must)
 

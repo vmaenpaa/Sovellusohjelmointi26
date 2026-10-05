@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { apiFetch } from "../api/client";
+import { useQuery } from "@tanstack/react-query";
+import { apiRequest } from "../api/client";
 import "./HomePage.css";
 
 export default function HomePage() {
-  const [status, setStatus] = useState<"loading" | "ok" | "not-ok">("loading");
+  const health = useQuery({
+    queryKey: ["health"],
+    queryFn: () => apiRequest<{ status: string }>("/health"),
+    enabled: false,
+  });
 
-  const handleTest = async () => {
-    setStatus("loading");
+  const status: "loading" | "ok" | "not-ok" = health.isError
+    ? "not-ok"
+    : health.data
+      ? health.data.status === "ok"
+        ? "ok"
+        : "not-ok"
+      : "loading";
 
-    try {
-      const response = await apiFetch("/health");
-      const data = await response.json();
-
-      setStatus(data.status === "ok" ? "ok" : "not-ok");
-    } catch {
-      setStatus("not-ok");
-    }
+  const handleTest = () => {
+    health.refetch();
   };
 
   return (
