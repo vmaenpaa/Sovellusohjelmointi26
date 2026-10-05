@@ -128,7 +128,7 @@ Skip stretch tickets you did not do.
 ### S3-11 — Ownership enforcement (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** c1b3c28
 - **Demonstration:**
   1. **Do this:** As User B, call get/update/delete on User A’s session and plan IDs.
   2. **Capture:** Failed responses (404 or 403).
@@ -139,15 +139,15 @@ Skip stretch tickets you did not do.
 
 ### S3-12 — Calendar API (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** `GET /calendar?from=&to=` (optional `plan_id`) for dated sessions.
   2. **Capture:** Calendar response.
   3. **Must show:** Only current user’s sessions with `session_at` in range.
   4. **Save as:** `docs/reports/images/sprint-03/s3-12-calendar-api.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Added calendar service, which returns sessions, that are inside given dates and optionally can be given a spesific plan_id.
+- **Used AI?** Yes
 
 ### S3-13 — TanStack Query setup (Must)
 
