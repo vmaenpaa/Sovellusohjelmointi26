@@ -7,7 +7,7 @@ from app.models.workout_session import WorkoutSession
 from app.models.workout_session_item import WorkoutSessionItem
 
 
-def get_by_id(
+def get_session_for_user(
     db: Session,
     user_id: int,
     session_id: int,

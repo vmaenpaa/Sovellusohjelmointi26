@@ -4,13 +4,10 @@ from sqlalchemy.orm import Session
 
 from app.models.goal import Goal
 from app.repositories.activity_type import get_visible_to_user
-from app.repositories.goal import get_by_id, list_for_user
+from app.repositories.goal import list_for_user
 from app.repositories.unit_type import get_by_id as get_unit_type_by_id
 from app.schemas.goal import GoalCreate, GoalUpdate
-
-
-class GoalNotFoundError(ValueError):
-	pass
+from app.services.ownership import load_goal_for_user
 
 
 class GoalValidationError(ValueError):
@@ -39,8 +36,8 @@ def list_goals(
 	return list_for_user(db, user_id, active=active)
 
 
-def get_goal(db: Session, user_id: int, goal_id: int) -> Goal | None:
-	return get_by_id(db, user_id, goal_id)
+def get_goal(db: Session, user_id: int, goal_id: int) -> Goal:
+	return load_goal_for_user(db, goal_id, user_id)
 
 
 def create_goal(db: Session, user_id: int, goal_data: GoalCreate) -> Goal:
@@ -66,9 +63,7 @@ def update_goal(
 	goal_id: int,
 	goal_data: GoalUpdate,
 ) -> Goal:
-	goal = get_by_id(db, user_id, goal_id)
-	if goal is None:
-		raise GoalNotFoundError("Goal not found")
+	goal = load_goal_for_user(db, goal_id, user_id)
 
 	updated_fields = goal_data.model_fields_set
 
@@ -101,9 +96,7 @@ def update_goal(
 
 
 def delete_goal(db: Session, user_id: int, goal_id: int) -> None:
-	goal = get_by_id(db, user_id, goal_id)
-	if goal is None:
-		raise GoalNotFoundError("Goal not found")
+	goal = load_goal_for_user(db, goal_id, user_id)
 
 	db.delete(goal)
 	db.flush()

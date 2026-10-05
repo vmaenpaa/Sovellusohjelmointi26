@@ -6,9 +6,8 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.plan import PlanCreate, PlanDetail, PlanRead, PlanUpdate
 from app.schemas.session import SessionRead
+from app.services.ownership import PlanNotFoundError, SessionNotFoundError
 from app.services.plans import (
-	PlanNotFoundError,
-	SessionNotFoundError,
 	attach_session,
 	create_plan,
 	delete_plan,
@@ -23,10 +22,14 @@ from app.services.sessions import get_session
 router = APIRouter(prefix="/plans", tags=["plans"])
 
 
-def _not_found(error: ValueError) -> HTTPException:
+def _not_found(error: PlanNotFoundError | SessionNotFoundError) -> HTTPException:
+	detail = {
+		PlanNotFoundError: "Plan not found",
+		SessionNotFoundError: "Session not found",
+	}[type(error)]
 	return HTTPException(
 		status_code=status.HTTP_404_NOT_FOUND,
-		detail=str(error),
+		detail=detail,
 	)
 
 
@@ -55,10 +58,10 @@ def get_user_plan(
 	current_user: User = Depends(get_current_user),
 	db: Session = Depends(get_db),
 ) -> PlanDetail:
-	plan = get_plan(db, current_user.id, plan_id)
-	if plan is None:
-		raise HTTPException(status_code=404, detail="Plan not found")
-	return plan
+	try:
+		return get_plan(db, current_user.id, plan_id)
+	except PlanNotFoundError as error:
+		raise _not_found(error) from error
 
 
 @router.patch("/{plan_id}", response_model=PlanRead)

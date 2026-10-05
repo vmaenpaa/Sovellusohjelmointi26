@@ -4,17 +4,14 @@ from sqlalchemy.orm import Session
 
 from app.models.workout_plan import WorkoutPlan
 from app.models.workout_session import WorkoutSession
-from app.repositories.plan import get_by_id, list_for_user
-from app.repositories.session import get_by_id as get_session_by_id
+from app.repositories.plan import list_for_user
 from app.schemas.plan import PlanCreate, PlanUpdate
-
-
-class PlanNotFoundError(ValueError):
-	pass
-
-
-class SessionNotFoundError(ValueError):
-	pass
+from app.services.ownership import (
+	SessionNotFoundError,
+	load_plan_for_user,
+	load_plan_with_sessions_for_user,
+	load_session_for_user,
+)
 
 
 def create_plan(
@@ -41,8 +38,8 @@ def get_plan(
 	db: Session,
 	user_id: int,
 	plan_id: int,
-) -> WorkoutPlan | None:
-	return get_by_id(db, user_id, plan_id)
+) -> WorkoutPlan:
+	return load_plan_with_sessions_for_user(db, plan_id, user_id)
 
 
 def list_plans(
@@ -58,9 +55,7 @@ def update_plan(
 	plan_id: int,
 	plan_data: PlanUpdate,
 ) -> WorkoutPlan:
-	plan = get_by_id(db, user_id, plan_id)
-	if plan is None:
-		raise PlanNotFoundError("Plan not found")
+	plan = load_plan_for_user(db, plan_id, user_id)
 
 	updated_fields = plan_data.model_fields_set
 	if "name" in updated_fields:
@@ -82,9 +77,7 @@ def delete_plan(
 	user_id: int,
 	plan_id: int,
 ) -> None:
-	plan = get_by_id(db, user_id, plan_id)
-	if plan is None:
-		raise PlanNotFoundError("Plan not found")
+	plan = load_plan_for_user(db, plan_id, user_id)
 
 	db.delete(plan)
 	db.flush()
@@ -96,13 +89,9 @@ def attach_session(
 	plan_id: int,
 	session_id: int,
 ) -> WorkoutSession:
-	plan = get_by_id(db, user_id, plan_id)
-	if plan is None:
-		raise PlanNotFoundError("Plan not found")
+	plan = load_plan_for_user(db, plan_id, user_id)
 
-	session = get_session_by_id(db, user_id, session_id)
-	if session is None:
-		raise SessionNotFoundError("Session not found")
+	session = load_session_for_user(db, session_id, user_id)
 
 	session.plan_id = plan_id
 	session.updated_at = datetime.now(timezone.utc)
@@ -117,13 +106,11 @@ def detach_session(
 	plan_id: int,
 	session_id: int,
 ) -> None:
-	plan = get_by_id(db, user_id, plan_id)
-	if plan is None:
-		raise PlanNotFoundError("Plan not found")
+	plan = load_plan_for_user(db, plan_id, user_id)
 
-	session = get_session_by_id(db, user_id, session_id)
-	if session is None or session.plan_id != plan_id:
-		raise SessionNotFoundError("Session not found")
+	session = load_session_for_user(db, session_id, user_id)
+	if session.plan_id != plan_id:
+		raise SessionNotFoundError
 
 	session.plan_id = None
 	session.updated_at = datetime.now(timezone.utc)

@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.models.goal import Goal
 
 
-def get_by_id(db: Session, user_id: int, goal_id: int) -> Goal | None:
+def get_goal_for_user(db: Session, user_id: int, goal_id: int) -> Goal | None:
     return db.scalar(
         select(Goal).where(
             Goal.id == goal_id,

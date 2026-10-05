@@ -5,8 +5,8 @@ from app.core.deps import get_current_user
 from app.db.session import get_db
 from app.models.user import User
 from app.schemas.goal import GoalCreate, GoalRead, GoalUpdate
+from app.services.ownership import GoalNotFoundError
 from app.services.goals import (
-	GoalNotFoundError,
 	GoalValidationError,
 	create_goal,
 	delete_goal,
@@ -19,10 +19,10 @@ from app.services.goals import (
 router = APIRouter(prefix="/goals", tags=["goals"])
 
 
-def _not_found(error: ValueError) -> HTTPException:
+def _not_found(error: GoalNotFoundError) -> HTTPException:
 	return HTTPException(
 		status_code=status.HTTP_404_NOT_FOUND,
-		detail=str(error),
+		detail="Goal not found",
 	)
 
 
@@ -67,10 +67,10 @@ def get_user_goal(
 	current_user: User = Depends(get_current_user),
 	db: Session = Depends(get_db),
 ) -> GoalRead:
-	goal = get_goal(db, current_user.id, goal_id)
-	if goal is None:
-		raise HTTPException(status_code=404, detail="Goal not found")
-	return goal
+	try:
+		return get_goal(db, current_user.id, goal_id)
+	except GoalNotFoundError as error:
+		raise _not_found(error) from error
 
 
 @router.patch("/{goal_id}", response_model=GoalRead)

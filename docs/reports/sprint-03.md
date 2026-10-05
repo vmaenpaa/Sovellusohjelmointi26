@@ -116,7 +116,7 @@ Skip stretch tickets you did not do.
 ### S3-10 — Goals CRUD API (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 2e0ba87
 - **Demonstration:**
   1. **Do this:** Create/list a period goal with `unit_type_id` in `/docs`.
   2. **Capture:** Goal payload.
@@ -127,15 +127,15 @@ Skip stretch tickets you did not do.
 
 ### S3-11 — Ownership enforcement (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** As User B, call get/update/delete on User A’s session and plan IDs.
   2. **Capture:** Failed responses (404 or 403).
   3. **Must show:** Cross-user access denied; note your status convention.
   4. **Save as:** `docs/reports/images/sprint-03/s3-11-ownership.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Another user cant call GET/PATCH/DELETE to another users sessions or plans.
+- **Used AI?** Yes
 
 ### S3-12 — Calendar API (Must)
 

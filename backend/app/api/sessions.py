@@ -13,10 +13,9 @@ from app.schemas.session import (
 	SessionStatus,
 	SessionUpdate,
 )
+from app.services.ownership import PlanNotFoundError, SessionNotFoundError
 from app.services.sessions import (
-	PlanNotFoundError,
 	SessionItemValidationError,
-	SessionNotFoundError,
 	clone_session,
 	create_session,
 	delete_session,
@@ -29,10 +28,14 @@ from app.services.sessions import (
 router = APIRouter(prefix="/sessions", tags=["sessions"])
 
 
-def _not_found(error: ValueError) -> HTTPException:
+def _not_found(error: PlanNotFoundError | SessionNotFoundError) -> HTTPException:
+	detail = {
+		SessionNotFoundError: "Session not found",
+		PlanNotFoundError: "Plan not found",
+	}[type(error)]
 	return HTTPException(
 		status_code=status.HTTP_404_NOT_FOUND,
-		detail=str(error),
+		detail=detail,
 	)
 
 
@@ -161,10 +164,10 @@ def get_user_session(
 	current_user: User = Depends(get_current_user),
 	db: Session = Depends(get_db),
 ) -> SessionRead:
-	session = get_session(db, current_user.id, session_id)
-	if session is None:
-		raise HTTPException(status_code=404, detail="Session not found")
-	return session
+	try:
+		return get_session(db, current_user.id, session_id)
+	except SessionNotFoundError as error:
+		raise _not_found(error) from error
 
 
 @router.patch("/{session_id}", response_model=SessionRead)

@@ -1,24 +1,18 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.activity_type import ActivityType
 from app.models.activity_type_unit_type import ActivityTypeUnitType
-from app.models.workout_plan import WorkoutPlan
 from app.models.workout_session import WorkoutSession
 from app.models.workout_session_item import WorkoutSessionItem
 from app.models.workout_session_measurement import WorkoutSessionMeasurement
-from app.repositories.session import get_by_id, list_for_user
+from app.repositories.session import list_for_user
 from app.schemas.session import SessionClone, SessionUpdate
-
-
-class PlanNotFoundError(ValueError):
-	pass
-
-
-class SessionNotFoundError(ValueError):
-	pass
+from app.services.ownership import (
+	load_plan_for_user,
+	load_session_for_user,
+)
 
 
 class SessionItemValidationError(ValueError):
@@ -27,25 +21,6 @@ class SessionItemValidationError(ValueError):
 
 class ActivityTypeNotFoundError(SessionItemValidationError):
 	pass
-
-
-def _get_owned_plan(
-	db: Session,
-	user_id: int,
-	plan_id: int | None,
-) -> WorkoutPlan | None:
-	if plan_id is None:
-		return None
-
-	plan = db.scalar(
-		select(WorkoutPlan).where(
-			WorkoutPlan.id == plan_id,
-			WorkoutPlan.user_id == user_id,
-		)
-	)
-	if plan is None:
-		raise PlanNotFoundError("Plan not found")
-	return plan
 
 
 def _add_items(db: Session, session: WorkoutSession, items: list) -> None:
@@ -90,7 +65,8 @@ def create_session(
 	user_id: int,
 	session_data,
 ) -> WorkoutSession:
-	_get_owned_plan(db, user_id, session_data.plan_id)
+	if session_data.plan_id is not None:
+		load_plan_for_user(db, session_data.plan_id, user_id)
 
 	now = datetime.now(timezone.utc)
 	session = WorkoutSession(
@@ -116,11 +92,10 @@ def clone_session(
 	session_id: int,
 	session_data: SessionClone,
 ) -> WorkoutSession:
-	source = get_session(db, user_id, session_id)
-	if source is None:
-		raise SessionNotFoundError("Session not found")
+	source = load_session_for_user(db, session_id, user_id)
 
-	_get_owned_plan(db, user_id, session_data.plan_id)
+	if session_data.plan_id is not None:
+		load_plan_for_user(db, session_data.plan_id, user_id)
 	now = datetime.now(timezone.utc)
 	clone = WorkoutSession(
 		user_id=user_id,
@@ -160,8 +135,8 @@ def get_session(
 	db: Session,
 	user_id: int,
 	session_id: int,
-) -> WorkoutSession | None:
-	return get_by_id(db, user_id, session_id)
+) -> WorkoutSession:
+	return load_session_for_user(db, session_id, user_id)
 
 
 def list_sessions(
@@ -193,13 +168,12 @@ def update_session(
 	session_id: int,
 	session_data: SessionUpdate,
 ) -> WorkoutSession:
-	session = get_by_id(db, user_id, session_id)
-	if session is None:
-		raise SessionNotFoundError("Session not found")
+	session = load_session_for_user(db, session_id, user_id)
 
 	updated_fields = session_data.model_fields_set
 	if "plan_id" in updated_fields:
-		_get_owned_plan(db, user_id, session_data.plan_id)
+		if session_data.plan_id is not None:
+			load_plan_for_user(db, session_data.plan_id, user_id)
 		session.plan_id = session_data.plan_id
 	if "name" in updated_fields:
 		session.name = session_data.name
@@ -225,9 +199,7 @@ def delete_session(
 	user_id: int,
 	session_id: int,
 ) -> None:
-	session = get_by_id(db, user_id, session_id)
-	if session is None:
-		raise SessionNotFoundError("Session not found")
+	session = load_session_for_user(db, session_id, user_id)
 
 	db.delete(session)
 	db.flush()
