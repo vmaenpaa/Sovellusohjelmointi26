@@ -159,7 +159,7 @@ Skip stretch tickets you did not do.
 ### S3-14 — Sessions list and filters UI (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 9738b6b
 - **Demonstration:**
   1. **Do this:** Open Sessions in the UI with filters visible.
   2. **Capture:** Screenshot of the list.
@@ -170,15 +170,15 @@ Skip stretch tickets you did not do.
 
 ### S3-15 — Session designer planned and actual (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Create/edit a multi-exercise session with planned and/or actual inputs from unit links.
   2. **Capture:** Designer UI.
   3. **Must show:** Catalog-driven fields (e.g. per-set strength + running).
   4. **Save as:** `docs/reports/images/sprint-03/s3-15-designer.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Added page, where its possible to create new or edit old session.
+- **Used AI?** Yes
 
 ### S3-16 — Edit, delete, and clone session UI (Must)
 

@@ -52,10 +52,20 @@ export async function apiRequest<T>(
     return data as T;
 }
 
+export type Measurement = {
+    id: number;
+    unit_type_id: number;
+    planned_value: string | null;
+    actual_value: string | null;
+    set_index: number | null;
+};
+
 export type SessionItem = {
     id: number;
     activity_type_id: number;
     sort_order: number;
+    notes: string | null;
+    measurements: Measurement[];
 };
 
 export type SessionSummary = {
@@ -67,14 +77,48 @@ export type SessionSummary = {
     items: SessionItem[];
 };
 
+export type SessionDetail = SessionSummary & {
+    notes: string | null;
+    intensity: number | null;
+};
+
+export type SessionWrite = {
+    name: string;
+    session_at: string | null;
+    status: string;
+    notes: string | null;
+    intensity: number | null;
+    plan_id: number | null;
+    items: {
+        activity_type_id: number;
+        sort_order: number;
+        notes: string | null;
+        measurements: {
+            unit_type_id: number;
+            planned_value: number | null;
+            actual_value: number | null;
+            set_index: number | null;
+        }[];
+    }[];
+};
+
 export type Plan = {
     id: number;
     name: string;
 };
 
+export type UnitLink = {
+    unit_type_id: number;
+    sort_order: number;
+    is_required: boolean;
+    per_set: boolean;
+    unit_type: { name: string; slug: string; label: string | null };
+};
+
 export type ActivityType = {
     id: number;
     name: string;
+    unit_links: UnitLink[];
 };
 
 export function listSessions(filters: SessionFilters = {}) {
@@ -103,4 +147,24 @@ export function listPlans() {
 
 export function listActivityTypes() {
     return apiRequest<ActivityType[]>("/activity-types");
+}
+
+export function getSession(id: number) {
+    return apiRequest<SessionDetail>(`/sessions/${id}`);
+}
+
+export function createSession(body: SessionWrite) {
+    return apiRequest<SessionDetail>("/sessions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+}
+
+export function updateSession(id: number, body: SessionWrite) {
+    return apiRequest<SessionDetail>(`/sessions/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
 }

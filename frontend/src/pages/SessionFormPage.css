@@ -1,0 +1,148 @@
+.designer-page {
+  box-sizing: border-box;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  color: #111827;
+  font-family: Arial, sans-serif;
+}
+
+.designer-form {
+  display: grid;
+  gap: 16px;
+}
+
+.designer-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.designer-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.designer-page input,
+.designer-page select,
+.designer-page textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px;
+  font: inherit;
+}
+
+.designer-wide {
+  grid-column: 1 / -1;
+}
+
+.designer-exercises {
+  display: grid;
+  gap: 12px;
+}
+
+.designer-exercise {
+  grid-template-columns: 1fr;
+}
+
+.designer-exercise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.designer-exercise-actions,
+.measurement-set-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.designer-page button {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 6px 12px;
+  background: #ffffff;
+  color: #374151;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.designer-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.measurement-editor {
+  display: grid;
+  gap: 8px;
+}
+
+.measurement-unit {
+  display: grid;
+  gap: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.measurement-unit legend {
+  color: #111827;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.measurement-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.measurement-row label {
+  flex: 1;
+}
+
+.measurement-set {
+  min-width: 48px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.measurement-empty,
+.designer-muted {
+  color: #6b7280;
+}
+
+.designer-error {
+  color: #b91c1c;
+}
+
+.designer-saved {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.designer-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.designer-page .designer-save {
+  border-color: #111827;
+  background: #111827;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.designer-extras {
+  flex: 1;
+}
