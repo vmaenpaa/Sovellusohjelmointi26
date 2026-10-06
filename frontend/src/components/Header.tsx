@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import type { AuthenticatedUser } from "../auth/ProtectedRoute";
 import "./Header.css";
 
@@ -13,6 +14,10 @@ export default function Header({ user, onLogout }: HeaderProps) {
 				<span className="app-header-label">Signed in as</span>
 				<strong>{user?.display_name}</strong>
 			</div>
+			<nav className="app-header-nav">
+				<NavLink to="/" end>Home</NavLink>
+				<NavLink to="/sessions">Sessions</NavLink>
+			</nav>
 			<button className="app-header-logout" type="button" onClick={onLogout}>
 				Log out
 			</button>

@@ -152,21 +152,21 @@ Skip stretch tickets you did not do.
 ### S3-13 — TanStack Query setup (Must)
 
 - **Status:** Done / deferred (why): Done
-- **PR / commit:**
+- **PR / commit:** d090cae
 - **Used AI?** Yes
 - **Note your query-key convention**: Sessions => ["sessions", filters], session => ["sessions", "detail", id], plans => ["plans], plan => ["plans", "detail", id], calendar => ["calendar", from, to, plandId (this can be null)], activityTypes => ["activity-types"] and goals => ["goals", active]
 
 ### S3-14 — Sessions list and filters UI (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open Sessions in the UI with filters visible.
   2. **Capture:** Screenshot of the list.
   3. **Must show:** Logged-in user’s sessions only.
   4. **Save as:** `docs/reports/images/sprint-03/s3-14-sessions-ui.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Made UI for session, that allows user to filter own sessions.
+- **Used AI?** Yes
 
 ### S3-15 — Session designer planned and actual (Must)
 

@@ -19,6 +19,23 @@
   min-width: 0;
 }
 
+.app-header-nav {
+  display: flex;
+  flex: 1;
+  gap: 16px;
+}
+
+.app-header-nav a {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-header-nav a.active {
+  color: #111827;
+}
+
 .app-header-label {
   color: #6b7280;
   font-size: 13px;
