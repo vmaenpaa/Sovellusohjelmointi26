@@ -161,6 +161,23 @@ export function createSession(body: SessionWrite) {
     });
 }
 
+export type SessionClone = {
+    name?: string;
+    session_at?: string | null;
+};
+
+export function cloneSession(id: number, body: SessionClone) {
+    return apiRequest<SessionDetail>(`/sessions/${id}/clone`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+}
+
+export function deleteSession(id: number) {
+    return apiRequest<null>(`/sessions/${id}`, { method: "DELETE" });
+}
+
 export function updateSession(id: number, body: SessionWrite) {
     return apiRequest<SessionDetail>(`/sessions/${id}`, {
         method: "PATCH",

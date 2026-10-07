@@ -171,7 +171,7 @@ Skip stretch tickets you did not do.
 ### S3-15 — Session designer planned and actual (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** a206dd8
 - **Demonstration:**
   1. **Do this:** Create/edit a multi-exercise session with planned and/or actual inputs from unit links.
   2. **Capture:** Designer UI.
@@ -182,15 +182,15 @@ Skip stretch tickets you did not do.
 
 ### S3-16 — Edit, delete, and clone session UI (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Clone from the UI onto a date; optionally show delete confirm.
   2. **Capture:** Clone result in UI.
   3. **Must show:** Clone available from the session UI.
   4. **Save as:** `docs/reports/images/sprint-03/s3-16-clone-ui.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Cloning and deleting sessions possible through UI.
+- **Used AI?** Yes
 
 ### S3-17 — Activity type selector (Must)
 

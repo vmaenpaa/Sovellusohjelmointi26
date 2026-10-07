@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import {
 	ApiError,
+	cloneSession,
 	createSession,
+	deleteSession,
 	getSession,
 	listActivityTypes,
 	listPlans,
@@ -24,6 +26,21 @@ import {
 	type SessionDraft,
 } from "../sessions/draft";
 import "./SessionFormPage.css";
+
+function errorMessage(error: unknown, fallback: string) {
+	if (error instanceof ApiError) {
+		if (error.status === 404) {
+			return error.detail && error.detail !== "Not Found"
+				? error.detail
+				: "Session not found.";
+		}
+		if (error.status === 403) {
+			return "You cannot change this session.";
+		}
+		return error.detail;
+	}
+	return fallback;
+}
 
 export default function SessionFormPage() {
 	const { sessionId } = useParams();
@@ -96,6 +113,37 @@ function DesignerForm({
 	);
 	const [validationError, setValidationError] = useState<string | null>(null);
 	const [saved, setSaved] = useState(false);
+	const [confirmingDelete, setConfirmingDelete] = useState(false);
+	const [cloneName, setCloneName] = useState(session?.name ?? "");
+	const [cloneAt, setCloneAt] = useState("");
+	const cloned =
+		(useLocation().state as { cloned?: boolean } | null)?.cloned === true;
+
+	const invalidateSessions = () =>
+		Promise.all([
+			queryClient.invalidateQueries({ queryKey: ["sessions"] }),
+			queryClient.invalidateQueries({ queryKey: ["calendar"] }),
+		]);
+
+	const remove = useMutation({
+		mutationFn: () => deleteSession(sessionId as number),
+		onSuccess: async () => {
+			await invalidateSessions();
+			navigate("/sessions");
+		},
+	});
+
+	const clone = useMutation({
+		mutationFn: () =>
+			cloneSession(sessionId as number, {
+				name: cloneName.trim(),
+				session_at: cloneAt ? new Date(cloneAt).toISOString() : null,
+			}),
+		onSuccess: async (result) => {
+			await invalidateSessions();
+			navigate(`/sessions/${result.id}`, { state: { cloned: true } });
+		},
+	});
 
 	const setDraft = (next: SessionDraft) => {
 		setSaved(false);
@@ -157,6 +205,12 @@ function DesignerForm({
 	return (
 		<main className="designer-page">
 			<h1>{sessionId === null ? "New session" : "Edit session"}</h1>
+
+			{cloned && (
+				<p className="designer-banner">
+					Cloned!
+				</p>
+			)}
 
 			<form className="designer-form" onSubmit={handleSubmit} noValidate>
 				<section className="designer-card">
@@ -329,9 +383,7 @@ function DesignerForm({
 				)}
 				{save.isError && (
 					<p className="designer-error" role="alert">
-						{save.error instanceof ApiError
-							? save.error.detail
-							: "Could not save the session."}
+						{errorMessage(save.error, "Could not save the session.")}
 					</p>
 				)}
 				{saved && <p className="designer-saved">Saved.</p>}
@@ -340,10 +392,81 @@ function DesignerForm({
 					<button type="submit" className="designer-save" disabled={save.isPending}>
 						{save.isPending ? "Saving..." : "Save"}
 					</button>
-					{/* Reserved for delete and clone controls (S3-16). */}
-					<div className="designer-extras" />
+					<div className="designer-extras">
+						{sessionId !== null &&
+							(confirmingDelete ? (
+								<span className="designer-confirm">
+									Delete this session? This cannot be undone.
+									<button
+										type="button"
+										disabled={remove.isPending}
+										onClick={() => remove.mutate()}
+									>
+										{remove.isPending ? "Deleting..." : "Confirm delete"}
+									</button>
+									<button
+										type="button"
+										onClick={() => setConfirmingDelete(false)}
+									>
+										Cancel
+									</button>
+								</span>
+							) : (
+								<button type="button" onClick={() => setConfirmingDelete(true)}>
+									Delete
+								</button>
+							))}
+					</div>
 				</div>
+				{remove.isError && (
+					<p className="designer-error" role="alert">
+						{errorMessage(remove.error, "Could not delete the session.")}
+					</p>
+				)}
 			</form>
+
+			{sessionId !== null && (
+				<section className="designer-card designer-clone">
+					<h2>Clone</h2>
+					<p className="designer-muted designer-wide">
+						Clones the saved version. Planned values are kept, actuals are
+						cleared, status is set to planned. The plan is not copied, so the
+						copy is off the plan. Later edits to either session do not affect
+						the other.
+					</p>
+					<label>
+						Copy name
+						<input
+							type="text"
+							value={cloneName}
+							maxLength={200}
+							onChange={(event) => setCloneName(event.target.value)}
+						/>
+					</label>
+					<label>
+						Copy date and time (optional, empty = unscheduled)
+						<input
+							type="datetime-local"
+							value={cloneAt}
+							onChange={(event) => setCloneAt(event.target.value)}
+						/>
+					</label>
+					{clone.isError && (
+						<p className="designer-error designer-wide" role="alert">
+							{errorMessage(clone.error, "Could not clone the session.")}
+						</p>
+					)}
+					<div className="designer-wide">
+						<button
+							type="button"
+							disabled={clone.isPending || cloneName.trim() === ""}
+							onClick={() => clone.mutate()}
+						>
+							{clone.isPending ? "Cloning..." : "Clone"}
+						</button>
+					</div>
+				</section>
+			)}
 		</main>
 	);
 }
