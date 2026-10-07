@@ -34,6 +34,24 @@
   font: inherit;
 }
 
+.sessions-filters .activity-select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sessions-filters .activity-select select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+}
+
+.sessions-filters .activity-select-helper {
+  color: #6b7280;
+}
+
 .sessions-filters input:disabled {
   background: #f3f4f6;
   cursor: not-allowed;
@@ -50,6 +68,7 @@
   border-radius: 8px;
   padding: 8px 14px;
   font: inherit;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 }

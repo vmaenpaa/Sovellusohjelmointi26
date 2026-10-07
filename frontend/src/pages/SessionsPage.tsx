@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import { listActivityTypes, listPlans, listSessions } from "../api/client";
 import { queryKeys, type SessionFilters } from "../api/queryKeys";
+import ActivityTypeSelect from "../components/ActivityTypeSelect";
 import {
 	formatSessionDate,
 	statusLabel,
@@ -122,17 +123,13 @@ export default function SessionsPage() {
 				</label>
 				<label>
 					Activity
-					<select
-						value={draft.activityTypeId}
-						onChange={(event) => update("activityTypeId", event.target.value)}
-					>
-						<option value="">All activities</option>
-						{(activityTypes.data ?? []).map((activity) => (
-							<option key={activity.id} value={activity.id}>
-								{activity.name}
-							</option>
-						))}
-					</select>
+					<ActivityTypeSelect
+						activityTypes={activityTypes.data ?? []}
+						value={draft.activityTypeId === "" ? "" : Number(draft.activityTypeId)}
+						onChange={(id) => update("activityTypeId", id === "" ? "" : String(id))}
+						allowEmpty
+						emptyLabel="All activities"
+					/>
 				</label>
 
 				<div className="sessions-actions">

@@ -15,6 +15,7 @@ import {
 	type SessionDetail,
 } from "../api/client";
 import { queryKeys } from "../api/queryKeys";
+import ActivityTypeSelect from "../components/ActivityTypeSelect";
 import MeasurementEditor from "../components/MeasurementEditor";
 import {
 	buildUnits,
@@ -287,13 +288,11 @@ function DesignerForm({
 					{draft.exercises.map((exercise, index) => (
 						<div key={exercise.key} className="designer-card designer-exercise">
 							<div className="designer-exercise-header">
-								<select
-									aria-label="Activity"
+								<ActivityTypeSelect
+									activityTypes={activityTypes}
 									value={exercise.activityTypeId}
-									onChange={(event) => {
-										const activity = activityTypes.find(
-											(a) => a.id === Number(event.target.value),
-										);
+									onChange={(id) => {
+										const activity = activityTypes.find((a) => a.id === id);
 										if (activity) {
 											updateExercise(index, {
 												activityTypeId: activity.id,
@@ -301,13 +300,7 @@ function DesignerForm({
 											});
 										}
 									}}
-								>
-									{activityTypes.map((activity) => (
-										<option key={activity.id} value={activity.id}>
-											{activity.name}
-										</option>
-									))}
-								</select>
+								/>
 								<div className="designer-exercise-actions">
 									<button
 										type="button"
@@ -355,25 +348,19 @@ function DesignerForm({
 						</div>
 					))}
 
-					<select
-						aria-label="Add exercise"
+					<ActivityTypeSelect
+						ariaLabel="Add exercise"
+						activityTypes={activityTypes}
 						value=""
-						onChange={(event) => {
-							const activity = activityTypes.find(
-								(a) => a.id === Number(event.target.value),
-							);
+						allowEmpty
+						emptyLabel="Add exercise..."
+						onChange={(id) => {
+							const activity = activityTypes.find((a) => a.id === id);
 							if (activity) {
 								updateField("exercises", [...draft.exercises, newExercise(activity)]);
 							}
 						}}
-					>
-						<option value="">Add exercise...</option>
-						{activityTypes.map((activity) => (
-							<option key={activity.id} value={activity.id}>
-								{activity.name}
-							</option>
-						))}
-					</select>
+					/>
 				</section>
 
 				{validationError && (

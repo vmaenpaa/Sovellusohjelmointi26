@@ -183,7 +183,7 @@ Skip stretch tickets you did not do.
 ### S3-16 — Edit, delete, and clone session UI (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 8ebf383
 - **Demonstration:**
   1. **Do this:** Clone from the UI onto a date; optionally show delete confirm.
   2. **Capture:** Clone result in UI.
@@ -194,9 +194,9 @@ Skip stretch tickets you did not do.
 
 ### S3-17 — Activity type selector (Must)
 
-- **Status:** Done / deferred (why):
+- **Status:** Done: Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S3-18 — Plans UI (Must)
 

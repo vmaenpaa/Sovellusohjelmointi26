@@ -118,6 +118,9 @@ export type UnitLink = {
 export type ActivityType = {
     id: number;
     name: string;
+    slug: string;
+    is_system: boolean;
+    user_id: number | null;
     unit_links: UnitLink[];
 };
 
