@@ -195,20 +195,20 @@ Skip stretch tickets you did not do.
 ### S3-17 — Activity type selector (Must)
 
 - **Status:** Done: Done
-- **PR / commit:**
+- **PR / commit:** 6c37c5b
 - **Used AI?** Yes
 
 ### S3-18 — Plans UI (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open Plans; show members ordered by `session_at` / Unscheduled.
   2. **Capture:** Plan detail.
   3. **Must show:** Attach via `plan_id` story; no junction reorder UI.
   4. **Save as:** `docs/reports/images/sprint-03/s3-18-plans-ui.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** UI now shows plans and user can edit and delete plans. Plans also list in order.
+- **Used AI?** Yes
 
 ### S3-19 — Calendar UI (Must)
 

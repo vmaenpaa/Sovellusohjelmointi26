@@ -105,6 +105,26 @@ export type SessionWrite = {
 export type Plan = {
     id: number;
     name: string;
+    notes: string | null;
+    start_date: string | null;
+    length_weeks: number | null;
+    updated_at: string;
+};
+
+export type PlanMember = {
+    id: number;
+    name: string;
+    session_at: string | null;
+    status: string;
+};
+
+export type PlanDetail = Plan & { sessions: PlanMember[] };
+
+export type PlanWrite = {
+    name: string;
+    notes: string | null;
+    start_date: string | null;
+    length_weeks: number | null;
 };
 
 export type UnitLink = {
@@ -146,6 +166,42 @@ export function listSessions(filters: SessionFilters = {}) {
 
 export function listPlans() {
     return apiRequest<Plan[]>("/plans");
+}
+
+export function getPlan(id: number) {
+    return apiRequest<PlanDetail>(`/plans/${id}`);
+}
+
+export function createPlan(body: PlanWrite) {
+    return apiRequest<Plan>("/plans", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+}
+
+export function updatePlan(id: number, body: PlanWrite) {
+    return apiRequest<Plan>(`/plans/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+    });
+}
+
+export function deletePlan(id: number) {
+    return apiRequest<null>(`/plans/${id}`, { method: "DELETE" });
+}
+
+export function attachSession(planId: number, sessionId: number) {
+    return apiRequest<SessionSummary>(`/plans/${planId}/sessions/${sessionId}`, {
+        method: "POST",
+    });
+}
+
+export function detachSession(planId: number, sessionId: number) {
+    return apiRequest<null>(`/plans/${planId}/sessions/${sessionId}`, {
+        method: "DELETE",
+    });
 }
 
 export function listActivityTypes() {
