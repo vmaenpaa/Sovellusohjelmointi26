@@ -164,6 +164,20 @@ export function listSessions(filters: SessionFilters = {}) {
     return apiRequest<SessionSummary[]>(`/sessions${query ? `?${query}` : ""}`);
 }
 
+export type CalendarSession = {
+	id: number;
+	name: string;
+	session_at: string;
+	status: string;
+	plan_id: number | null;
+};
+
+export function getCalendar(from: string, to: string, planId?: number | null) {
+	const params = new URLSearchParams({ from, to });
+	if (planId != null) params.set("plan_id", String(planId));
+	return apiRequest<CalendarSession[]>(`/calendar?${params.toString()}`);
+}
+
 export function listPlans() {
     return apiRequest<Plan[]>("/plans");
 }

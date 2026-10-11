@@ -98,6 +98,20 @@
   cursor: not-allowed;
 }
 
+.plan-primary:hover:not(:disabled) {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
+.plan-secondary:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.plan-danger:hover {
+  background: #fef2f2;
+}
+
 .plan-error {
   margin: 0;
   color: #b91c1c;

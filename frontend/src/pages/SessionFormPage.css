@@ -81,6 +81,16 @@
   opacity: 0.5;
 }
 
+.designer-page button:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.designer-page .designer-save:hover:not(:disabled) {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
 .measurement-editor {
   display: grid;
   gap: 8px;

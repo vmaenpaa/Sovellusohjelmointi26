@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { queryClient } from "./api/queryClient.ts";
 import ProtectedRoute from "./auth/ProtectedRoute.tsx";
+import CalendarPage from "./pages/CalendarPage.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import PlanDetailPage from "./pages/PlanDetailPage.tsx";
@@ -22,6 +23,7 @@ ReactDOM.createRoot(root).render(
           <Route path="/sessions" element={<SessionsPage />} />
           <Route path="/sessions/new" element={<SessionFormPage />} />
           <Route path="/sessions/:sessionId" element={<SessionFormPage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/plans/:planId" element={<PlanDetailPage />} />
         </Route>

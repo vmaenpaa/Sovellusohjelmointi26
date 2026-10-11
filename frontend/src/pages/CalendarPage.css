@@ -1,0 +1,141 @@
+.calendar-page {
+	padding: 1rem;
+}
+
+.calendar-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.calendar-nav,
+.calendar-toggle {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.calendar-page button {
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	padding: 6px 12px;
+	background: #ffffff;
+	color: #374151;
+	font: inherit;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.calendar-page button:hover:not(:disabled) {
+	background: #f3f4f6;
+	border-color: #9ca3af;
+}
+
+.calendar-page button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.calendar-toggle button.active {
+	background: #111827;
+	border-color: #111827;
+	color: #ffffff;
+}
+
+.calendar-toggle button.active:hover:not(:disabled) {
+	background: #1f2937;
+	border-color: #1f2937;
+}
+
+.calendar-title {
+	min-width: 10rem;
+}
+
+.calendar-message {
+	margin: 0.5rem 0;
+}
+
+.calendar-error {
+	color: #b00020;
+	margin: 0.25rem 0;
+}
+
+.calendar-grid {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+	gap: 2px;
+}
+
+.calendar-weekday {
+	font-weight: bold;
+	text-align: center;
+	padding: 0.25rem;
+}
+
+.calendar-day {
+	border: 1px solid #ccc;
+	min-height: 6rem;
+	padding: 0.25rem;
+}
+
+.calendar-grid-week .calendar-day {
+	min-height: 12rem;
+}
+
+.calendar-day.outside {
+	opacity: 0.45;
+}
+
+.calendar-day.today {
+	border: 2px solid #1a73e8;
+	background: rgba(26, 115, 232, 0.08);
+}
+
+.calendar-day-number {
+	font-size: 0.85rem;
+	margin-bottom: 0.25rem;
+}
+
+.calendar-today-mark {
+	color: #1a73e8;
+	font-weight: bold;
+}
+
+.calendar-chip {
+	border-left: 4px solid #888;
+	background: rgba(128, 128, 128, 0.12);
+	padding: 0.15rem 0.3rem;
+	margin-bottom: 0.25rem;
+	font-size: 0.8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+	overflow-wrap: anywhere;
+}
+
+.calendar-chip.status-planned {
+	border-left-color: #1a73e8;
+}
+
+.calendar-chip.status-in_progress {
+	border-left-color: #f9a825;
+}
+
+.calendar-chip.status-completed {
+	border-left-color: #2e7d32;
+}
+
+.calendar-chip-meta {
+	font-size: 0.75rem;
+	opacity: 0.75;
+}
+
+.calendar-clone-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	margin-top: 0.25rem;
+	padding: 0.25rem;
+	border: 1px solid #ccc;
+}
