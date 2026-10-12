@@ -1,3 +1,5 @@
+import { queryClient } from "../api/queryClient";
+
 const TOKEN_KEY = "access_token";
 
 export function setToken(token: string) {
@@ -10,4 +12,6 @@ export function getToken() {
 
 export function clearToken() {
 	localStorage.removeItem(TOKEN_KEY);
+	// Cached rows belong to the previous account.
+	queryClient.clear();
 }

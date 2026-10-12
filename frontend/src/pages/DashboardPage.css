@@ -1,0 +1,41 @@
+.dashboard-health {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.dashboard-health-button {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: transparent;
+  color: #374151;
+  padding: 4px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dashboard-health-button:hover {
+  background: #f3f4f6;
+}
+
+.dashboard-health-status {
+  font-weight: 600;
+}
+
+.dashboard-health-status.ok {
+  color: #15803d;
+}
+
+.dashboard-health-status.not-ok {
+  color: #b91c1c;
+}
+
+.dashboard-health-status.loading {
+  color: #6b7280;
+  font-weight: 400;
+}

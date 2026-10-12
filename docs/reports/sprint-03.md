@@ -213,7 +213,7 @@ Skip stretch tickets you did not do.
 ### S3-19 — Calendar UI (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 166d51f
 - **Demonstration:**
   1. **Do this:** Show **month** and **week** views; clone onto a date if available.
   2. **Capture:** Both views (or clearly labeled tabs).
@@ -224,15 +224,15 @@ Skip stretch tickets you did not do.
 
 ### S3-20 — Dashboard recent sessions (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open Dashboard after login.
   2. **Capture:** Recent sessions or empty state.
   3. **Must show:** Current user only.
   4. **Save as:** `docs/reports/images/sprint-03/s3-20-dashboard.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Removed original homepage and added dashboard instead of it. 
+- **Used AI?** Yes
 
 ### S3-21 — Empty and error states (Should)
 
