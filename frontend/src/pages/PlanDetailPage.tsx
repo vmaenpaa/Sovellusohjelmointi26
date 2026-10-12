@@ -13,6 +13,7 @@ import {
 } from "../api/client";
 import { queryKeys } from "../api/queryKeys";
 import PlanForm from "../components/PlanForm";
+import { ErrorBanner } from "../components/StatusMessage";
 import { formatSessionDate, statusLabel } from "../sessions/display";
 import "./PlansPage.css";
 
@@ -85,7 +86,7 @@ export default function PlanDetailPage() {
 	if (plan.isError) {
 		return (
 			<main className="plans-page">
-				<p className="plan-error">Could not load plan.</p>
+				<ErrorBanner message="Could not load plan." />
 				<button type="button" className="plan-secondary" onClick={() => navigate("/plans")}>
 					Back to plans
 				</button>
@@ -113,6 +114,16 @@ export default function PlanDetailPage() {
 		event.preventDefault();
 		if (selected !== "") attach.mutate(Number(selected));
 	};
+
+	const actionError = save.isError
+		? errorText(save.error, "Could not save plan.")
+		: attach.isError
+			? errorText(attach.error, "Could not attach session.")
+			: detach.isError
+				? errorText(detach.error, "Could not detach session.")
+				: remove.isError
+					? errorText(remove.error, "Could not delete plan.")
+					: null;
 
 	const renderRows = (rows: typeof data.sessions) => (
 		<ul>
@@ -143,6 +154,7 @@ export default function PlanDetailPage() {
 				Back to plans
 			</button>
 			<h1>{data.name}</h1>
+			{actionError && <ErrorBanner message={actionError} />}
 
 			<section>
 				<h2>Details</h2>
@@ -151,7 +163,7 @@ export default function PlanDetailPage() {
 					initial={data}
 					submitLabel="Save changes"
 					pending={save.isPending}
-					error={save.isError ? errorText(save.error, "Could not save plan.") : null}
+					error={null}
 					onSubmit={(body) => save.mutate(body)}
 				/>
 			</section>
@@ -164,11 +176,6 @@ export default function PlanDetailPage() {
 			<section>
 				<h2>Unscheduled sessions</h2>
 				{unscheduled.length === 0 ? <p>No unscheduled sessions.</p> : renderRows(unscheduled)}
-				{detach.isError && (
-					<p className="plan-error" role="alert">
-						{errorText(detach.error, "Could not detach session.")}
-					</p>
-				)}
 			</section>
 
 			<section>
@@ -195,11 +202,6 @@ export default function PlanDetailPage() {
 						Attach
 					</button>
 				</form>
-				{attach.isError && (
-					<p className="plan-error" role="alert">
-						{errorText(attach.error, "Could not attach session.")}
-					</p>
-				)}
 			</section>
 
 			<section>
@@ -212,11 +214,6 @@ export default function PlanDetailPage() {
 				>
 					Delete plan
 				</button>
-				{remove.isError && (
-					<p className="plan-error" role="alert">
-						{errorText(remove.error, "Could not delete plan.")}
-					</p>
-				)}
 			</section>
 		</main>
 	);

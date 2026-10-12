@@ -225,7 +225,7 @@ Skip stretch tickets you did not do.
 ### S3-20 — Dashboard recent sessions (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 9dde19a
 - **Demonstration:**
   1. **Do this:** Open Dashboard after login.
   2. **Capture:** Recent sessions or empty state.
@@ -236,15 +236,15 @@ Skip stretch tickets you did not do.
 
 ### S3-21 — Empty and error states (Should)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Show empty list and an error/retry state.
   2. **Capture:** Screenshot.
   3. **Must show:** Clear empty/error UX.
   4. **Save as:** `docs/reports/images/sprint-03/s3-21-empty-error.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** If getting error while fetching data, the page shows error and error message.
+- **Used AI?** Yes
 
 ### S3-22 — IDOR demo documentation (Must)
 

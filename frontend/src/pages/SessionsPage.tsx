@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { listActivityTypes, listPlans, listSessions } from "../api/client";
 import { queryKeys, type SessionFilters } from "../api/queryKeys";
 import ActivityTypeSelect from "../components/ActivityTypeSelect";
+import { EmptyState, ErrorBanner } from "../components/StatusMessage";
 import {
 	formatSessionDate,
 	statusLabel,
@@ -151,18 +152,22 @@ export default function SessionsPage() {
 			{sessions.isPending && <p className="sessions-message">Loading sessions...</p>}
 
 			{sessions.isError && (
-				<p className="sessions-error" role="alert">
-					Could not load sessions: {sessions.error.message}
-				</p>
+				<ErrorBanner message={`Could not load sessions: ${sessions.error.message}`} />
 			)}
 
-			{sessions.isSuccess && sessions.data.length === 0 && (
-				<p className="sessions-message">
-					{hasActiveFilters(applied)
-						? "No sessions match these filters."
-						: "No sessions yet. Create your first session to get started."}
-				</p>
-			)}
+			{sessions.isSuccess && sessions.data.length === 0 &&
+				(hasActiveFilters(applied) ? (
+					<EmptyState
+						title="No sessions match these filters"
+						description="Try widening the dates or clearing the filters."
+					/>
+				) : (
+					<EmptyState
+						title="No sessions yet"
+						description="Your log is empty."
+						action={{ to: "/sessions/new", label: "Create your first session" }}
+					/>
+				))}
 
 			{sessions.isSuccess && sessions.data.length > 0 && (
 				<ul className="sessions-list">

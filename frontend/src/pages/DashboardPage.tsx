@@ -6,6 +6,7 @@ import {
 	listSessions,
 } from "../api/client";
 import { queryKeys } from "../api/queryKeys";
+import { EmptyState, ErrorBanner } from "../components/StatusMessage";
 import {
 	formatSessionDate,
 	statusLabel,
@@ -71,16 +72,14 @@ export default function DashboardPage() {
 				)}
 
 				{sessions.isError && (
-					<p className="sessions-error" role="alert">
-						Could not load sessions: {sessions.error.message}
-					</p>
+					<ErrorBanner message={`Could not load sessions: ${sessions.error.message}`} />
 				)}
 
 				{sessions.isSuccess && recent.length === 0 && (
-					<p className="sessions-message">
-						No dated sessions yet.{" "}
-						<Link to="/sessions/new">Create your first session</Link>
-					</p>
+					<EmptyState
+						title="No dated sessions yet"
+						action={{ to: "/sessions/new", label: "Create your first session" }}
+					/>
 				)}
 
 				{recent.length > 0 && (

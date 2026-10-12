@@ -26,6 +26,7 @@ import {
 	validateDraft,
 	type SessionDraft,
 } from "../sessions/draft";
+import { ErrorBanner } from "../components/StatusMessage";
 import "./SessionFormPage.css";
 
 function errorMessage(error: unknown, fallback: string) {
@@ -369,9 +370,7 @@ function DesignerForm({
 					</p>
 				)}
 				{save.isError && (
-					<p className="designer-error" role="alert">
-						{errorMessage(save.error, "Could not save the session.")}
-					</p>
+					<ErrorBanner message={errorMessage(save.error, "Could not save the session.")} />
 				)}
 				{saved && <p className="designer-saved">Saved.</p>}
 
@@ -439,9 +438,9 @@ function DesignerForm({
 						/>
 					</label>
 					{clone.isError && (
-						<p className="designer-error designer-wide" role="alert">
-							{errorMessage(clone.error, "Could not clone the session.")}
-						</p>
+						<div className="designer-wide">
+							<ErrorBanner message={errorMessage(clone.error, "Could not clone the session.")} />
+						</div>
 					)}
 					<div className="designer-wide">
 						<button

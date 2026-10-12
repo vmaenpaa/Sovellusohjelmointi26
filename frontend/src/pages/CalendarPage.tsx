@@ -9,6 +9,7 @@ import {
 	type CalendarSession,
 } from "../api/client";
 import { queryKeys } from "../api/queryKeys";
+import { EmptyState, ErrorBanner } from "../components/StatusMessage";
 import {
 	dayKey,
 	parseDayKey,
@@ -153,15 +154,13 @@ export default function CalendarPage() {
 
 			{calendar.isPending && <p className="calendar-message">Loading calendar…</p>}
 			{calendar.isError && (
-				<p className="calendar-error" role="alert">
-					{errorMessage(calendar.error, "Could not load calendar.")}
-				</p>
+				<ErrorBanner message={errorMessage(calendar.error, "Could not load calendar.")} />
 			)}
 			{calendar.isSuccess && calendar.data.length === 0 && (
-				<p className="calendar-message">
-					No sessions in this range
-					{selectedPlan ? ` for plan "${selectedPlan.name}"` : ""}.
-				</p>
+				<EmptyState
+					title={`No sessions in this range${selectedPlan ? ` for plan "${selectedPlan.name}"` : ""}`}
+					description="Try another period or plan."
+				/>
 			)}
 
 			<div className={`calendar-grid calendar-grid-${view}`}>
@@ -213,11 +212,7 @@ export default function CalendarPage() {
 													onChange={(event) => setCloneDate(event.target.value)}
 												/>
 											</label>
-											{cloneError && (
-												<p className="calendar-error" role="alert">
-													{cloneError}
-												</p>
-											)}
+											{cloneError && <ErrorBanner message={cloneError} />}
 											<button
 												type="button"
 												disabled={cloneMutation.isPending}
