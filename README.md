@@ -12,7 +12,7 @@ Before installing, make sure you have following installed:
 - Python 
 
 **With docker**
-1. Copy .env.example to .env
+1. Copy .env.example to .env and copy frontend/.env.example to  frontend/.env
 2. Run 
 ```bash
 docker compose up --build

@@ -248,19 +248,19 @@ Skip stretch tickets you did not do.
 
 ### S3-22 — IDOR demo documentation (Must)
 
-- **Status:**
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** S3-22: add IDOR demo documentation
 - **Demonstration:**
   1. **Do this:** Open your IDOR write-up; confirm two-account steps for session/plan/goal/calendar.
   2. **Capture:** Doc snippet or `/docs` failure screenshot referenced by the write-up.
   3. **Must show:** Documented 404 vs 403 choice.
   4. **Save as:** `docs/reports/images/sprint-03/s3-22-idor.png`
-  5. **Caption:**
-- **Used AI?** Yes / No
+  5. **Caption:** Made idor document, so that new user can easily follow instructions and test the security of this project.
+- **Used AI?** Yes
 
 ### S3-23 — Optional Goals UI (Stretch)
 
-- **Status:** Done / deferred (why):
+- **Status:** Done / deferred (why): Not done, because optional.
 - **PR / commit:**
 - **Demonstrations:**
 - Screenshot of the optional Goals UI
@@ -275,14 +275,18 @@ For each completed stretch: Status, PR/commit, Used AI? Add a short Demonstratio
 ## Design notes
 
 Two to four technical choices (e.g. 404 vs 403; how clone sets `plan_id`; calendar empty days).
+1. Every missing or unknown object uses 404, so that nobody knows if certain id is actually in use or no. 
+2. Clone sets plan_id if its in the clone request, otherwise its not attached to any plan.
 
 ## Retrospective
 
 What went well / what to change next sprint (Sprint 4 charts).
+1. Frontend UI is simple enough, but bit outdated looking. 
 
 ## Carry-over
 
 Deferred Must/Should, stretch leftovers, risks for [Sprint 4 tickets](../tickets/sprint-04-tickets.md).
+Last task (S3-23) was left over, because it was optional.
 
 ## AI usage (sprint-level reflection)
 
@@ -292,11 +296,11 @@ Here, cover your **overall** AI use during this sprint (Cursor, ChatGPT, Copilot
 
 If you marked **No** on every ticket, write a short note that you did not use AI coding assistants this sprint (you may still answer verification / independence questions briefly).
 
-- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump):
-- **What I typically accepted from AI suggestions:**
-- **What I typically rejected or reworked, and why:**
-- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews):
-- **What I can now explain or do independently** that I relied on AI for earlier:
-- **Anything I would do differently with AI next sprint:**
+- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump): AI helps building good base for any task and helps alot explaining for example what functions does what. 
+- **What I typically accepted from AI suggestions:** Most of the AI suggestions are good, but some of them need little fixing. 
+- **What I typically rejected or reworked, and why:** Frontend suggestions needed most of the time little reworking.
+- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews): Tested all of them with through /docs or straight from to frontend and checked from database that everything looks as they should. 
+- **What I can now explain or do independently** that I relied on AI for earlier: How tanstack queries work. 
+- **Anything I would do differently with AI next sprint:** No.
 
 Do not paste secrets, full JWTs, or `.env` values.
