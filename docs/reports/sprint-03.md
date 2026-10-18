@@ -249,7 +249,7 @@ Skip stretch tickets you did not do.
 ### S3-22 — IDOR demo documentation (Must)
 
 - **Status:** Done
-- **PR / commit:** S3-22: add IDOR demo documentation
+- **PR / commit:** S3-22: add IDOR demo documentation / 80bba5c
 - **Demonstration:**
   1. **Do this:** Open your IDOR write-up; confirm two-account steps for session/plan/goal/calendar.
   2. **Capture:** Doc snippet or `/docs` failure screenshot referenced by the write-up.
