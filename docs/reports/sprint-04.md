@@ -30,14 +30,14 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-01 — Analytics module skeleton (Must)
 
 - **Status:** Done
-- **PR / commit:**  
+- **PR / commit:** 215a616
 - **Used AI?** Yes
 
 ### S4-02 — Summary metrics (Must)
 
-- **Status:**
-- **PR / commit:**
-- **Used AI?** Yes / No
+- **Status:** Done
+- **PR / commit:** 
+- **Used AI?** Yes 
 
 ### S4-03 — Progress time series (Must)
 
