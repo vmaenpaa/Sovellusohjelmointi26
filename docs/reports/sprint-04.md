@@ -48,21 +48,21 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-04 — Streak metrics (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 97495fa
 - **Used AI?** Yes
 
 ### S4-05 — Analytics unit tests (Must)
 
-- **Status:**
-- **PR / commit:**
+- **Status:** Done
+- **PR / commit:** 
 - **Demonstration:**
   1. **Do this:** From the documented working directory, run `pytest` for the analytics unit tests (pure Python—no UI required).
   2. **Capture:** Terminal screenshot of the test run.
   3. **Must show:** Analytics-related tests **passed** (summary / progress / streaks coverage as in your tickets).
   4. **Must not show:** Secrets in the environment dump.
   5. **Save as:** `docs/reports/images/sprint-04/s4-05-pytest.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made pytest, that tests functionality of every analytics function. 
+- **Used AI?** Yes
 
 ### S4-06 — Stats summary endpoint (Must)
 

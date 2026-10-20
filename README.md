@@ -164,6 +164,18 @@ docker compose logs db
 
 Make sure you have copied .env.example to .env in root folder and in /frontend.
 
+## Running tests
+
+**Backend analytic functions tests**
+<br>
+This test does not need backend and/or frontend running.
+<br>
+
+Run on cmd: 
+```bash
+python3 -m pytest backend/app/tests/test_analytics.py
+```
+
 ## Note to self
 
 1. /register navigates to /login, does not auto-login.
