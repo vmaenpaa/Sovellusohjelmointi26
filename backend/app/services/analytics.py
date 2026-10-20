@@ -182,3 +182,43 @@ def build_weekly_series(
         )
         current += timedelta(days=7)
     return points
+
+
+def build_streaks(
+    sessions: Iterable[SessionInput], today: date | None = None
+) -> dict[str, int]:
+    """Return current and longest consecutive calendar-day session streaks.
+
+    Only sessions with a non-null ``session_at`` count, using
+    ``session_at.date()``; callers should normalize timezones consistently.
+    Today counts only when it has a session. Otherwise, the current streak is
+    anchored to yesterday, so a session-free day today does not break an
+    in-progress streak until today ends. The streaks cover all supplied
+    history; empty or sparse histories return zero counts.
+    """
+    if today is None:
+        today = date.today()
+
+    active_dates = {
+        session.session_at.date()
+        for session in sessions
+        if session.session_at is not None
+    }
+    longest = 0
+    run = 0
+    previous = None
+    for active_date in sorted(active_dates):
+        run = run + 1 if previous == active_date - timedelta(days=1) else 1
+        longest = max(longest, run)
+        previous = active_date
+
+    current = 0
+    anchor = today if today in active_dates else today - timedelta(days=1)
+    if anchor in active_dates:
+        current = 1
+        previous = anchor - timedelta(days=1)
+        while previous in active_dates:
+            current += 1
+            previous -= timedelta(days=1)
+
+    return {"current": current, "longest": longest}
