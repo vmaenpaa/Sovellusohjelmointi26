@@ -54,7 +54,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-05 — Analytics unit tests (Must)
 
 - **Status:** Done
-- **PR / commit:** 
+- **PR / commit:** 8a7d79d
 - **Demonstration:**
   1. **Do this:** From the documented working directory, run `pytest` for the analytics unit tests (pure Python—no UI required).
   2. **Capture:** Terminal screenshot of the test run.
@@ -66,7 +66,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S4-06 — Stats summary endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Authorize in `/docs`. Call `GET /stats/summary` for a **known** period where you already know expected totals from fixtures or seeded sessions.
@@ -74,8 +74,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Successful summary response for that period (counts/totals visible).
   4. **Must not show:** Full JWT; crop Authorize.
   5. **Save as:** `docs/reports/images/sprint-04/s4-06-summary.png`
-  6. **Caption (1–2 sentences):** (state the period and expected numbers briefly)
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** I had one session in 1.10.2026 and it had cycling with actual values (60 minutes and 15 kilometer) and running without actual values, only planned.
+- **Used AI?** Yes
 
 ### S4-07 — Stats progress endpoint (Must)
 

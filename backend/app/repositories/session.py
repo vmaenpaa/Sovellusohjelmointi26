@@ -5,6 +5,37 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.models.workout_session import WorkoutSession
 from app.models.workout_session_item import WorkoutSessionItem
+from app.models.workout_session_measurement import WorkoutSessionMeasurement
+
+
+def list_scheduled_in_range(
+    db: Session,
+    user_id: int,
+    *,
+    session_from: datetime | None = None,
+    session_to: datetime | None = None,
+) -> list[WorkoutSession]:
+    statement = select(WorkoutSession).where(
+        WorkoutSession.user_id == user_id,
+        WorkoutSession.session_at.is_not(None),
+    )
+    if session_from is not None:
+        statement = statement.where(WorkoutSession.session_at >= session_from)
+    if session_to is not None:
+        statement = statement.where(WorkoutSession.session_at <= session_to)
+
+    return list(
+        db.scalars(
+            statement.order_by(WorkoutSession.session_at).options(
+                selectinload(WorkoutSession.items).selectinload(
+                    WorkoutSessionItem.activity_type
+                ),
+                selectinload(WorkoutSession.items)
+                .selectinload(WorkoutSessionItem.measurements)
+                .selectinload(WorkoutSessionMeasurement.unit_type),
+            )
+        ).all()
+    )
 
 
 def get_session_for_user(

@@ -12,6 +12,7 @@ from .api.goals import router as goals_router
 from .api.health import router as health_router
 from .api.plans import router as plans_router
 from .api.sessions import router as sessions_router
+from .api.stats import router as stats_router
 from .core.config import Settings
 
 app = FastAPI()
@@ -34,6 +35,7 @@ app.include_router(sessions_router)
 app.include_router(calendar_router)
 app.include_router(plans_router)
 app.include_router(goals_router)
+app.include_router(stats_router)
 
 app.add_middleware(
     SessionMiddleware,
