@@ -12,6 +12,7 @@ from backend.app.services.analytics import (
 	MeasurementInput,
 	SessionInput,
 	SessionItemInput,
+	build_series,
 	build_streaks,
 	build_weekly_series,
 	summarize_sessions,
@@ -177,6 +178,41 @@ def test_build_streaks_counts_calendar_days_and_ignores_unscheduled(
 		"current": 0,
 		"longest": 3,
 	}
+
+
+# Checks month buckets, gap filling, id filter before bucketing, and invalid input.
+def test_build_series_monthly_and_id_filter() -> None:
+	def run(day: datetime, type_id: int, slug: str, value: str) -> SessionInput:
+		return SessionInput(
+			session_at=day,
+			items=(
+				SessionItemInput(
+					activity_type_slug=slug,
+					activity_type_id=type_id,
+					measurements=(MeasurementInput("reps", Decimal(value)),),
+				),
+			),
+		)
+
+	sessions = [
+		run(datetime(2024, 1, 31, 9), 1, "running", "5"),
+		run(datetime(2024, 3, 2, 9), 2, "bench_press", "8"),
+		run(datetime(2024, 3, 3, 9), 1, "running", "2"),
+	]
+	assert build_series(sessions, "reps", "month") == [
+		{"period_label": "2024-01", "period_start": "2024-01-01", "value": 5.0},
+		{"period_label": "2024-02", "period_start": "2024-02-01", "value": 0.0},
+		{"period_label": "2024-03", "period_start": "2024-03-01", "value": 10.0},
+	]
+	assert build_series(sessions, "session_count", "month", activity_type_id=2) == [
+		{"period_label": "2024-01", "period_start": "2024-01-01", "value": 0.0},
+		{"period_label": "2024-02", "period_start": "2024-02-01", "value": 0.0},
+		{"period_label": "2024-03", "period_start": "2024-03-01", "value": 1.0},
+	]
+	with pytest.raises(ValueError):
+		build_series(sessions, "bogus", "month")  # type: ignore[arg-type]
+	with pytest.raises(ValueError):
+		build_series(sessions, "reps", "day")  # type: ignore[arg-type]
 
 
 # Checks that every analytics function handles empty history without errors.

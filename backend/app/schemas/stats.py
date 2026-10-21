@@ -1,4 +1,34 @@
+from enum import Enum
+
 from pydantic import BaseModel, Field
+
+
+class ProgressMetric(str, Enum):
+    """session_count counts sessions; the rest are unit slugs (sum of actual values)."""
+
+    session_count = "session_count"
+    duration_min = "duration_min"
+    distance_km = "distance_km"
+    reps = "reps"
+    weight_kg = "weight_kg"
+
+
+class ProgressGranularity(str, Enum):
+    week = "week"
+    month = "month"
+
+
+class ProgressPoint(BaseModel):
+    period_label: str = Field(description='ISO week "YYYY-Www" or month "YYYY-MM".')
+    period_start: str = Field(description="ISO date of the first day of the bucket.")
+    value: float
+
+
+class ProgressSeries(BaseModel):
+    metric: ProgressMetric
+    granularity: ProgressGranularity
+    activity_type_id: int | None = None
+    points: list[ProgressPoint]
 
 
 class ActivityTypeSummary(BaseModel):

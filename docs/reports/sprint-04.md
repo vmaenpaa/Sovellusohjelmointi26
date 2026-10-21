@@ -67,7 +67,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-06 — Stats summary endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 05fcec2
 - **Demonstration:**
   1. **Do this:** Authorize in `/docs`. Call `GET /stats/summary` for a **known** period where you already know expected totals from fixtures or seeded sessions.
   2. **Capture:** Screenshot of the `/docs` response JSON.
@@ -79,7 +79,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S4-07 — Stats progress endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/docs`, call `GET /stats/progress` with period/granularity params you support.
@@ -87,8 +87,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Progress payload with series/points for the authenticated user.
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-04/s4-07-progress-api.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Progress payload that returns weekly reps after 19.10.2026. 
+- **Used AI?** Yes
 
 ### S4-08 — Stats streaks endpoint (Must)
 

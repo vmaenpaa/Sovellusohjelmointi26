@@ -3,13 +3,21 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 
 from app.models.workout_session import WorkoutSession
+from app.repositories.activity_type import get_visible_to_user
 from app.repositories.session import list_scheduled_in_range
 from app.services.analytics import (
+    Granularity,
     MeasurementInput,
+    Metric,
     SessionInput,
     SessionItemInput,
+    build_series,
     summarize_sessions,
 )
+
+
+class ActivityTypeNotFoundError(ValueError):
+    pass
 
 
 def _to_input(session: WorkoutSession) -> SessionInput:
@@ -20,6 +28,7 @@ def _to_input(session: WorkoutSession) -> SessionInput:
         items=tuple(
             SessionItemInput(
                 activity_type_slug=item.activity_type.slug,
+                activity_type_id=item.activity_type_id,
                 measurements=tuple(
                     MeasurementInput(
                         unit_slug=m.unit_type.slug,
@@ -46,3 +55,29 @@ def get_summary(
         db, user_id, session_from=session_from, session_to=session_to
     )
     return summarize_sessions([_to_input(s) for s in sessions])
+
+
+def get_progress(
+    db: Session,
+    user_id: int,
+    *,
+    metric: Metric,
+    granularity: Granularity,
+    activity_type_id: int | None = None,
+    session_from: datetime | None = None,
+    session_to: datetime | None = None,
+) -> list[dict]:
+    if (
+        activity_type_id is not None
+        and get_visible_to_user(db, user_id, activity_type_id) is None
+    ):
+        raise ActivityTypeNotFoundError(f"Unknown activity_type_id: {activity_type_id}")
+    sessions = list_scheduled_in_range(
+        db, user_id, session_from=session_from, session_to=session_to
+    )
+    return build_series(
+        [_to_input(s) for s in sessions],
+        metric,
+        granularity,
+        activity_type_id=activity_type_id,
+    )

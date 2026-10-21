@@ -10,9 +10,11 @@ Summary rules (single source of truth for the dashboard and /stats/summary):
 - Results are JSON-friendly (floats, lists, dicts).
 
 Time series rules:
-- Buckets use session_at; weeks are ISO weeks (Monday start, label "YYYY-Www").
+- Metrics: session_count, or a unit slug (duration_min, distance_km, reps, weight_kg).
+- Buckets use session_at; weeks are ISO weeks (Monday start, label "YYYY-Www"),
+  months are calendar months (label "YYYY-MM").
 - Sessions with null session_at are skipped.
-- Empty weeks between the first and last session are included with value 0.
+- Empty buckets between the first and last session are included with value 0.
 - session_at is bucketed in its own timezone; callers should normalize first.
 """
 
@@ -24,7 +26,12 @@ from datetime import date, datetime, timedelta
 from decimal import Decimal
 from typing import Literal
 
-Metric = Literal["session_count", "duration_min", "distance_km"]
+# Volume metrics are unit slugs; session_count counts sessions.
+Metric = Literal["session_count", "duration_min", "distance_km", "reps", "weight_kg"]
+METRICS: tuple[str, ...] = ("session_count", "duration_min", "distance_km", "reps", "weight_kg")
+
+Granularity = Literal["week", "month"]
+GRANULARITIES: tuple[str, ...] = ("week", "month")
 
 DURATION_SLUG = "duration_min"
 DISTANCE_SLUG = "distance_km"
@@ -46,6 +53,7 @@ class SessionItemInput:
 
     activity_type_slug: str
     measurements: tuple[MeasurementInput, ...] = ()
+    activity_type_id: int | None = None
 
 
 @dataclass(frozen=True)
@@ -137,35 +145,53 @@ def _week_label(d: date) -> str:
     iso_year, iso_week, _ = d.isocalendar()
     return f"{iso_year}-W{iso_week:02d}"
 
-# Returns the value of a session for a given metric and optional activity type filter.
+def _month_start(d: date) -> date:
+    return d.replace(day=1)
+
+
+def _next_month(d: date) -> date:
+    return date(d.year + d.month // 12, d.month % 12 + 1, 1)
+
+
+# Returns the value of a session for a metric; the type filter is applied before summing.
 def _session_value(
-    session: SessionInput, metric: Metric, activity_type_slug: str | None
+    session: SessionInput,
+    metric: str,
+    activity_type_id: int | None,
+    activity_type_slug: str | None = None,
 ) -> Decimal:
     items = [
         i
         for i in session.items
-        if activity_type_slug is None or i.activity_type_slug == activity_type_slug
+        if (activity_type_id is None or i.activity_type_id == activity_type_id)
+        and (activity_type_slug is None or i.activity_type_slug == activity_type_slug)
     ]
     if metric == "session_count":
         # With a type filter, only sessions containing that type count.
-        return Decimal(1 if items or activity_type_slug is None else 0)
+        filtered = activity_type_id is not None or activity_type_slug is not None
+        return Decimal(1 if items or not filtered else 0)
     return sum((_item_total(i, metric) for i in items), Decimal(0))
 
-# Builds a weekly time series for the given sessions, metric, and optional activity type filter.
-def build_weekly_series(
+
+def build_series(
     sessions: Iterable[SessionInput],
     metric: Metric = "session_count",
+    granularity: Granularity = "week",
+    activity_type_id: int | None = None,
     activity_type_slug: str | None = None,
 ) -> list[dict]:
-    """Chart points [{period_label, period_start, value}] per ISO week, oldest first."""
-    if metric not in ("session_count", DURATION_SLUG, DISTANCE_SLUG):
+    """Chart points [{period_label, period_start, value}] per week or month, oldest first."""
+    if metric not in METRICS:
         raise ValueError(f"Unsupported metric: {metric}")
+    if granularity not in GRANULARITIES:
+        raise ValueError(f"Unsupported granularity: {granularity}")
 
+    start_of = _week_start if granularity == "week" else _month_start
     totals: dict[date, Decimal] = {}
     for s in _scheduled(sessions):  # skips null session_at
-        start = _week_start(s.session_at.date())
+        start = start_of(s.session_at.date())
         totals[start] = totals.get(start, Decimal(0)) + _session_value(
-            s, metric, activity_type_slug
+            s, metric, activity_type_id, activity_type_slug
         )
     if not totals:
         return []
@@ -173,15 +199,26 @@ def build_weekly_series(
     points = []
     current, last = min(totals), max(totals)
     while current <= last:
+        label = _week_label(current) if granularity == "week" else current.strftime("%Y-%m")
         points.append(
             {
-                "period_label": _week_label(current),
+                "period_label": label,
                 "period_start": current.isoformat(),
                 "value": float(totals.get(current, Decimal(0))),
             }
         )
-        current += timedelta(days=7)
+        current = current + timedelta(days=7) if granularity == "week" else _next_month(current)
     return points
+
+
+def build_weekly_series(
+    sessions: Iterable[SessionInput],
+    metric: Metric = "session_count",
+    activity_type_slug: str | None = None,
+) -> list[dict]:
+    return build_series(
+        sessions, metric, "week", activity_type_slug=activity_type_slug
+    )
 
 
 def build_streaks(
