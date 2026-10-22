@@ -10,9 +10,15 @@ from app.schemas.stats import (
     ProgressGranularity,
     ProgressMetric,
     ProgressSeries,
+    StreakStats,
     StatsSummary,
 )
-from app.services.stats import ActivityTypeNotFoundError, get_progress, get_summary
+from app.services.stats import (
+    ActivityTypeNotFoundError,
+    get_progress,
+    get_streaks,
+    get_summary,
+)
 
 router = APIRouter(prefix="/stats", tags=["stats"])
 
@@ -47,6 +53,22 @@ def read_summary(
         session_from=session_from,
         session_to=session_to,
     )
+
+
+@router.get(
+    "/streaks",
+    response_model=StreakStats,
+    description=(
+        "Returns current and longest consecutive-day streaks across all of the "
+        "authenticated user's history. Only sessions with a non-null "
+        "session_at count."
+    ),
+)
+def read_streaks(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> StreakStats:
+    return get_streaks(db, current_user.id)
 
 
 @router.get("/progress", response_model=ProgressSeries)

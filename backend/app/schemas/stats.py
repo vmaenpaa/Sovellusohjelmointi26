@@ -44,3 +44,15 @@ class StatsSummary(BaseModel):
     total_distance_km: float = Field(description="Sum of actual distance_km measurements.")
     average_intensity: float = Field(description="Mean intensity of sessions that have one; 0 if none.")
     by_activity_type: list[ActivityTypeSummary]
+
+
+class StreakStats(BaseModel):
+    current: int = Field(
+        description=(
+            "Current consecutive-day streak across all history. Today counts if "
+            "active; otherwise the streak is anchored to yesterday."
+        )
+    )
+    longest: int = Field(
+        description="Longest consecutive-day streak across all history."
+    )

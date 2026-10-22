@@ -80,7 +80,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-07 — Stats progress endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** c0e512d
 - **Demonstration:**
   1. **Do this:** In `/docs`, call `GET /stats/progress` with period/granularity params you support.
   2. **Capture:** Screenshot of the time-series (or bucketed) JSON response.
@@ -92,7 +92,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S4-08 — Stats streaks endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** In `/docs`, call `GET /stats/streaks`.
@@ -100,8 +100,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Streak metrics returned for the authenticated user (document whether null `session_at` rows are excluded).
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-04/s4-08-streaks.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Streak metrics does not include sessions, where "session_at" is null. The function that builds streaks, does counts only non-null values. 
+- **Used AI?** Yes
 
 ### S4-09 — User-scoped stats queries (Must)
 

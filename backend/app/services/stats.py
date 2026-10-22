@@ -12,6 +12,7 @@ from app.services.analytics import (
     SessionInput,
     SessionItemInput,
     build_series,
+    build_streaks,
     summarize_sessions,
 )
 
@@ -55,6 +56,11 @@ def get_summary(
         db, user_id, session_from=session_from, session_to=session_to
     )
     return summarize_sessions([_to_input(s) for s in sessions])
+
+
+def get_streaks(db: Session, user_id: int) -> dict[str, int]:
+    sessions = list_scheduled_in_range(db, user_id)
+    return build_streaks([_to_input(session) for session in sessions])
 
 
 def get_progress(
