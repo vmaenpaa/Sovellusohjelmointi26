@@ -20,6 +20,7 @@ export default function Header({ user, onLogout }: HeaderProps) {
 				<NavLink to="/sessions/new">New session</NavLink>
 				<NavLink to="/calendar">Calendar</NavLink>
 				<NavLink to="/plans">Plans</NavLink>
+				<NavLink to="/progress">Progress</NavLink>
 			</nav>
 			<button className="app-header-logout" type="button" onClick={onLogout}>
 				Log out

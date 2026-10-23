@@ -8,6 +8,7 @@ import DashboardPage from "./pages/DashboardPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import PlanDetailPage from "./pages/PlanDetailPage.tsx";
 import PlansPage from "./pages/PlansPage.tsx";
+import ProgressPage from "./pages/ProgressPage.tsx";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import SessionFormPage from "./pages/SessionFormPage.tsx";
 import SessionsPage from "./pages/SessionsPage.tsx";
@@ -26,6 +27,7 @@ ReactDOM.createRoot(root).render(
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/plans/:planId" element={<PlanDetailPage />} />
+          <Route path="/progress" element={<ProgressPage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
