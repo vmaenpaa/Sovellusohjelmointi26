@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import {
@@ -6,6 +7,7 @@ import {
 	listSessions,
 } from "../api/client";
 import { queryKeys } from "../api/queryKeys";
+import StatWidgets from "../components/StatWidgets";
 import { EmptyState, ErrorBanner } from "../components/StatusMessage";
 import {
 	formatSessionDate,
@@ -16,8 +18,20 @@ import "./DashboardPage.css";
 import "./SessionsPage.css";
 
 const RECENT_LIMIT = 8;
+const PERIOD_OPTIONS = [7, 30, 90];
+
+function periodBounds(days: number) {
+	const start = new Date();
+	start.setDate(start.getDate() - (days - 1));
+	start.setHours(0, 0, 0, 0);
+	const end = new Date();
+	end.setHours(23, 59, 59, 999);
+	return { from: start.toISOString(), to: end.toISOString() };
+}
 
 export default function DashboardPage() {
+	const [periodDays, setPeriodDays] = useState(30);
+	const [period, setPeriod] = useState(() => periodBounds(30));
 	const sessions = useQuery({
 		queryKey: queryKeys.sessions({ unscheduled: false }),
 		queryFn: () => listSessions({ unscheduled: false }),
@@ -64,6 +78,7 @@ export default function DashboardPage() {
 		<main className="sessions-page">
 			<h1>Dashboard</h1>
 
+			<div className="dashboard-grid">
 			<section>
 				<h2>Recent sessions</h2>
 
@@ -105,6 +120,29 @@ export default function DashboardPage() {
 					</ul>
 				)}
 			</section>
+
+			<section>
+				<h2>Stats</h2>
+				<label className="dashboard-period">
+					Period
+					<select
+						value={periodDays}
+						onChange={(event) => {
+							const days = Number(event.target.value);
+							setPeriodDays(days);
+							setPeriod(periodBounds(days));
+						}}
+					>
+						{PERIOD_OPTIONS.map((days) => (
+							<option key={days} value={days}>
+								Last {days} days
+							</option>
+						))}
+					</select>
+				</label>
+				<StatWidgets from={period.from} to={period.to} />
+			</section>
+			</div>
 
 			<section className="dashboard-health">
 				<span>API status</span>

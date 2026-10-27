@@ -15,7 +15,7 @@ Tickets: [sprint-04-tickets.md](../tickets/sprint-04-tickets.md) · Index: [../R
 
 From the tickets: turn stored sessions into stats and charts you can explain. You are done when stats endpoints match known fixtures; analytics unit tests pass without the full UI; Progress shows sessions over time and distance/intensity by activity; Dashboard period widgets match the API.
 
-In your words (2–3 sentences): did you meet that, and what is still rough?
+In your words (2–3 sentences): did you meet that, and what is still rough? I did meet the requirements, but i do think the overall UI looks kind of dated. Also stats and progress widget could show more information.
 
 ## Tickets
 
@@ -138,7 +138,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-12 — Period controls (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** e7eeb41
 - **Demonstration:**
   1. **Do this:** On Progress, change period and/or granularity. Confirm charts refetch and update.
   2. **Capture:** Two screenshots (before and after the control change) or a single shot with the control and updated chart.
@@ -150,7 +150,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S4-13 — Dashboard stat widgets (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open Dashboard for the **same** period you used on Progress. Compare widget numbers to Progress / `/stats/summary`.
@@ -158,8 +158,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Period widgets (session count, totals, average intensity, or your implemented set) matching the same period as Progress.
   4. **Must not show:** Tokens or another user’s stats.
   5. **Save as:** `docs/reports/images/sprint-04/s4-13-dashboard.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Added widget to dashboard/frontpage, that shows last 7/30/90 days sessions, total duration, total distance and average intensity.
+- **Used AI?** Yes
 
 ### S4-14 — Stats README notes (Should)
 
@@ -231,15 +231,15 @@ Sprint 4 is **three weeks**.
 
 Two to four technical choices with why (for example how you define a streak, which `session_at` rows count).
 
-1.
-2.
+1. Streak session does not include sessions, where "session_at" is null, because it does not count as trained session. 
+2. Progress is grouped by weeks or months and both shows also weeks/months where session count is 0, so that it is possible to also track weeks/months without training.
 
 ## What we learned
 
 Note what you actually used. Tools this sprint: pytest, dataclasses / TypedDict, Recharts, TanStack Query (period filters). Sprint 4 Must is **pure Python** in the API—not pandas.
 
-- What clicked:
-- One thing you would do differently:
+- What clicked: How data analytics is added to page.
+- One thing you would do differently: Progress page could be better in many ways.
 
 ## Carry-over
 
@@ -253,12 +253,12 @@ Here, cover your **overall** AI use during this sprint (Cursor, ChatGPT, Copilot
 
 If you marked **No** on every ticket, write a short note that you did not use AI coding assistants this sprint (you may still answer verification / independence questions briefly).
 
-- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump):
-- **What I typically accepted from AI suggestions:**
-- **What I typically rejected or reworked, and why:**
-- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews):
-- **What I can now explain or do independently** that I relied on AI for earlier:
-- **Anything I would do differently with AI next sprint:**
+- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump): AI helped me most with building the linecharts.
+- **What I typically accepted from AI suggestions:** Css mostly and python analytic functions.
+- **What I typically rejected or reworked, and why:** UI did need some reworking many times.
+- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews): I did manual testing, also wrote couple of pytests.
+- **What I can now explain or do independently** that I relied on AI for earlier: I can explain how data ends up from query to chart on a webpage.
+- **Anything I would do differently with AI next sprint:** No.
 
 Do not paste secrets, full JWTs, or `.env` values.
 
