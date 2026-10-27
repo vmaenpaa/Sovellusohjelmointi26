@@ -125,7 +125,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-11 — Progress page charts (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 30b6815
 - **Demonstration:**
   1. **Do this:** Log in, open Progress for a **known** period whose numbers you can explain (same fixtures as tests or a hand-counted set).
   2. **Capture:** Screenshot of the Progress charts.
@@ -137,7 +137,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S4-12 — Period controls (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** On Progress, change period and/or granularity. Confirm charts refetch and update.
@@ -145,8 +145,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Period/granularity control changing the displayed data.
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-04/s4-12-period.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Progress page allows user to choose different timeperiods and allows choosing granularity between weeks or months.
+- **Used AI?** Yes
 
 ### S4-13 — Dashboard stat widgets (Must)
 

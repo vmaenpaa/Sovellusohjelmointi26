@@ -1,0 +1,86 @@
+.progress-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 20px;
+	margin: 16px 0 8px;
+	padding: 16px 0;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.progress-date-range {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(150px, 1fr));
+	gap: 12px;
+}
+
+.progress-date-range label,
+.progress-granularity {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin: 0;
+	color: #374151;
+	font-size: 13px;
+}
+
+.progress-date-range input {
+	box-sizing: border-box;
+	min-height: 38px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	padding: 6px 8px;
+	font: inherit;
+}
+
+.progress-granularity {
+	border: 0;
+	padding: 0;
+}
+
+.progress-granularity-options {
+	display: inline-flex;
+	width: fit-content;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.progress-granularity-options label {
+	display: flex;
+	min-height: 36px;
+	align-items: center;
+	gap: 6px;
+	padding: 0 12px;
+	background: #ffffff;
+	cursor: pointer;
+}
+
+.progress-granularity-options label + label {
+	border-left: 1px solid #d1d5db;
+}
+
+.progress-granularity-options label.active {
+	background: #f0fdf4;
+	color: #166534;
+	font-weight: 600;
+}
+
+.progress-granularity-options input {
+	margin: 0;
+	accent-color: #15803d;
+}
+
+.progress-range-error {
+	margin: 4px 0 16px;
+	color: #b91c1c;
+	font-size: 14px;
+}
+
+@media (max-width: 520px) {
+	.progress-date-range {
+		grid-template-columns: minmax(0, 1fr);
+		width: 100%;
+	}
+}
