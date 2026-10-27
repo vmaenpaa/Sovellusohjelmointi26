@@ -1,5 +1,9 @@
 import { clearToken, getToken } from "../auth/token";
-import type { SessionFilters } from "./queryKeys";
+import type {
+    ProgressFilters,
+    SessionFilters,
+    StatsSummaryFilters,
+} from "./queryKeys";
 
 const API_BASE_URL =
     import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
@@ -143,6 +147,49 @@ export type ActivityType = {
     user_id: number | null;
     unit_links: UnitLink[];
 };
+
+export type ProgressSeries = {
+    metric: ProgressFilters["metric"];
+    granularity: NonNullable<ProgressFilters["granularity"]>;
+    activity_type_id: number | null;
+    points: { period_label: string; period_start: string; value: number }[];
+};
+
+export type ActivityTypeStats = {
+    activity_type_slug: string;
+    session_count: number;
+    total_distance_km: number;
+    total_duration_min: number;
+};
+
+export type StatsSummary = {
+    session_count: number;
+    total_duration_min: number;
+    total_distance_km: number;
+    average_intensity: number;
+    by_activity_type: ActivityTypeStats[];
+};
+
+export function getProgress(filters: ProgressFilters) {
+    const params = new URLSearchParams({ metric: filters.metric });
+    if (filters.granularity) params.set("granularity", filters.granularity);
+    if (filters.activityTypeId !== undefined) {
+        params.set("activity_type_id", String(filters.activityTypeId));
+    }
+    if (filters.from) params.set("from", filters.from);
+    if (filters.to) params.set("to", filters.to);
+
+    return apiRequest<ProgressSeries>(`/stats/progress?${params.toString()}`);
+}
+
+export function getStatsSummary(filters: StatsSummaryFilters = {}) {
+    const params = new URLSearchParams();
+    if (filters.from) params.set("from", filters.from);
+    if (filters.to) params.set("to", filters.to);
+
+    const query = params.toString();
+    return apiRequest<StatsSummary>(`/stats/summary${query ? `?${query}` : ""}`);
+}
 
 export function listSessions(filters: SessionFilters = {}) {
     const params = new URLSearchParams();

@@ -119,12 +119,12 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-10 — Recharts setup (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** c7d13ef
 - **Used AI?** Yes
 
 ### S4-11 — Progress page charts (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Log in, open Progress for a **known** period whose numbers you can explain (same fixtures as tests or a hand-counted set).
@@ -132,8 +132,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Charts rendered for that period (sessions over time and/or distance/intensity by activity as implemented).
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-04/s4-11-progress.png`
-  6. **Caption (1–2 sentences):** (state expected numbers for the period)
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** For week 44 i had two sessions, and for week 45 i had one session. Overall distances were 15km cycling and 1km running for week 44 and 10km running for week 45. 
+- **Used AI?** Yes
 
 ### S4-12 — Period controls (Must)
 
