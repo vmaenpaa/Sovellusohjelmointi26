@@ -151,7 +151,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S4-13 — Dashboard stat widgets (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** e2f3d06
 - **Demonstration:**
   1. **Do this:** Open Dashboard for the **same** period you used on Progress. Compare widget numbers to Progress / `/stats/summary`.
   2. **Capture:** Screenshot of Dashboard widgets.

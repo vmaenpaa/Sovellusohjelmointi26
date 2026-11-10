@@ -179,6 +179,7 @@ python3 -m pytest backend/app/tests/test_analytics.py
 ## Note to self
 
 1. /register navigates to /login, does not auto-login.
+2. Local Ollama model name: mimo-v2.6
 
 ## Links
 
