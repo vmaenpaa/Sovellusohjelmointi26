@@ -30,7 +30,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-01 — Install Ollama locally (Must)
 
 - **Status:** Done / deferred (why): Done
-- **PR / commit:** 
+- **PR / commit:** cc8d652
 - **Demonstration:**
   1. **Do this:** On the host, run `ollama --version` and/or call the local tags/API (for example `http://localhost:11434`). Confirm a model is available if you already pulled one (`ollama list`).
   2. **Capture:** Terminal or browser screenshot of version/tags responding.
@@ -42,9 +42,9 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S5-02 — AIProvider protocol (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S5-03 — Ollama provider (Must)
 
