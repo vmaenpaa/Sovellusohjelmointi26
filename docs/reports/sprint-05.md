@@ -49,7 +49,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-03 — Ollama provider (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** f34e782
 - **Demonstration:**
   1. **Do this:** With Ollama up, run a successful generate/chat via your provider (small script, temporary call, or later `POST /ai/insights`).
   2. **Capture:** Screenshot of a successful response (terminal or `/docs`).
@@ -61,9 +61,9 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S5-04 — Cloud provider stub (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S5-05 — Provider factory and env (Must)
 
