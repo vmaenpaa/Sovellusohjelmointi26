@@ -16,5 +16,10 @@ class Settings(BaseSettings):
     sqladmin_password: str
     jwt_secret: str
     access_token_expire_minutes: int
+    ai_provider: str = 'ollama'
     ollama_base_url: str = 'http://localhost:11434'
     ollama_model: str = ''
+
+
+def get_settings() -> Settings:
+    return Settings()

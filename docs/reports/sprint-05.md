@@ -62,14 +62,14 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-04 — Cloud provider stub (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 213fa5f
 - **Used AI?** Yes
 
 ### S5-05 — Provider factory and env (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S5-06 — Optional Ollama Compose profile (Should)
 
