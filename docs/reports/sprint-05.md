@@ -43,12 +43,12 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-02 — AIProvider protocol (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 7a012a4
 - **Used AI?** Yes
 
 ### S5-03 — Ollama provider (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** With Ollama up, run a successful generate/chat via your provider (small script, temporary call, or later `POST /ai/insights`).
@@ -56,8 +56,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Local Ollama returned a model response through your code path.
   4. **Must not show:** Full prompts that dump another user’s data; crop or redact long histories. No API keys (none required for local Ollama).
   5. **Save as:** `docs/reports/images/sprint-05/s5-03-ollama-provider.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Added OllamaProvider function, which allows calling to local LLM model.
+- **Used AI?** Yes 
 
 ### S5-04 — Cloud provider stub (Must)
 
