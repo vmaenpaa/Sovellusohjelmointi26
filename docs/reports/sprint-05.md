@@ -87,12 +87,12 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-07 — Context builder (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 9566466
 - **Used AI?** Yes
 
 ### S5-08 — AI insights endpoint (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** With Ollama up and session history for the logged-in user, call `POST /ai/insights` in `/docs`.
@@ -100,8 +100,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Authenticated success path for `/ai/insights` with Ollama available.
   4. **Must not show:** Full JWT; crop Authorize. Prefer not to paste huge raw prompts.
   5. **Save as:** `docs/reports/images/sprint-05/s5-08-insights-api.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Added endpoint for AI, which allows you to call AI and get insights from trainings.
+- **Used AI?** Yes
 
 ### S5-09 — Structured response parsing (Must)
 
