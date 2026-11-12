@@ -68,12 +68,12 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-05 — Provider factory and env (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 48fc8e8
 - **Used AI?** Yes
 
 ### S5-06 — Optional Ollama Compose profile (Should)
 
-- **Status:**
+- **Status:** Skip
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** If you implemented the profile, start Compose with the `ollama` profile and show the service running. If you **skipped** this Should ticket, write `Skipped` in the caption and omit the image.
@@ -86,9 +86,9 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S5-07 — Context builder (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
-- **Used AI?** Yes / No
+- **Used AI?** Yes
 
 ### S5-08 — AI insights endpoint (Must)
 
