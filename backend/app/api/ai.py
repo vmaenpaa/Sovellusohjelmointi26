@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_user
@@ -8,6 +8,7 @@ from app.schemas.ai import InsightRequest, InsightResponse
 from app.services.ai.base import AIProvider
 from app.services.ai.factory import get_ai_provider
 from app.services.ai.insights import generate_insight
+from app.services.ai.ollama import OllamaUnavailableError
 
 
 router = APIRouter(prefix="/ai", tags=["ai"])
@@ -27,12 +28,17 @@ async def create_insight(
 	db: Session = Depends(get_db),
 	provider: AIProvider = Depends(get_ai_provider),
 ) -> InsightResponse:
-	return InsightResponse(
-		**await generate_insight(
+	try:
+		insight = await generate_insight(
 			db,
 			current_user.id,
 			request.period,
 			provider,
 			focus=request.focus,
 		)
-	)
+	except OllamaUnavailableError as exc:
+		raise HTTPException(
+			status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+			detail=str(exc),
+		) from exc
+	return InsightResponse(**insight)

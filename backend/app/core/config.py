@@ -1,3 +1,4 @@
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -19,6 +20,7 @@ class Settings(BaseSettings):
     ai_provider: str = 'ollama'
     ollama_base_url: str = 'http://localhost:11434'
     ollama_model: str = ''
+    ollama_timeout: float = Field(default=30.0, gt=0)
 
 
 def get_settings() -> Settings:

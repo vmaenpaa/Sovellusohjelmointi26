@@ -106,7 +106,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-09 — Structured response parsing (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** e2d2ad5
 - **Demonstration:**
   1. **Do this:** From `/ai/insights` (or the Insights UI), show a parsed payload that includes `summary`, `strengths`, `recommendations`, and `caveats`.
   2. **Capture:** Screenshot of the JSON or UI sections naming all four fields.
@@ -118,7 +118,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S5-10 — Timeouts and soft failure (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Stop Ollama (or force a timeout). Call Insights (`/docs` or UI) and confirm a clear error. Then open Sessions and/or Progress and confirm they still load.
@@ -126,8 +126,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** Soft failure on Insights; rest of the app remains usable.
   4. **Must not show:** Tokens or raw stack traces with secrets.
   5. **Save as:** `docs/reports/images/sprint-05/s5-10-soft-fail.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Stopping Ollama will return 503 error, but does not affect using the site.
+- **Used AI?** Yes
 
 ### S5-11 — Optional AiInsight cache (Stretch)
 

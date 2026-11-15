@@ -9,6 +9,10 @@ from ...schemas.ai import InsightResponse
 from .base import AIProvider, StructuredInsight
 
 
+class OllamaUnavailableError(RuntimeError):
+	"""Raised when Ollama cannot complete an insight request."""
+
+
 class OllamaProvider(AIProvider):
 	
 	def __init__(
@@ -20,6 +24,7 @@ class OllamaProvider(AIProvider):
 		provider_settings = settings or Settings()
 		self.base_url = provider_settings.ollama_base_url.rstrip('/')
 		self.model = provider_settings.ollama_model
+		self.timeout = provider_settings.ollama_timeout
 		self.transport = transport
 
 	async def generate_insight(self, context: dict[str, object]) -> StructuredInsight:
@@ -32,14 +37,19 @@ class OllamaProvider(AIProvider):
 			'format': 'json',
 			'stream': False,
 		}
-		async with httpx.AsyncClient(
-			base_url=self.base_url,
-			timeout=30.0,
-			transport=self.transport,
-		) as client:
-			response = await client.post('/api/generate', json=payload)
-			response.raise_for_status()
-			model_response = response.json().get('response', '')
+		try:
+			async with httpx.AsyncClient(
+				base_url=self.base_url,
+				timeout=self.timeout,
+				transport=self.transport,
+			) as client:
+				response = await client.post('/api/generate', json=payload)
+				response.raise_for_status()
+				model_response = response.json().get('response', '')
+		except (httpx.ConnectError, httpx.TimeoutException) as exc:
+			raise OllamaUnavailableError(
+				'Ollama is unavailable or did not respond before the timeout'
+			) from exc
 
 		return self._normalize_response(model_response)
 
