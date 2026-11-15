@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class InsightRequest(BaseModel):
@@ -25,7 +25,31 @@ class InsightRequest(BaseModel):
 
 
 class InsightResponse(BaseModel):
-	summary: str
-	strengths: list[str]
-	recommendations: list[str]
-	caveats: list[str]
+	summary: str = ""
+	strengths: list[str] = Field(default_factory=list)
+	recommendations: list[str] = Field(default_factory=list)
+	caveats: list[str] = Field(default_factory=list)
+
+	@model_validator(mode="before")
+	@classmethod
+	def normalize_sections(cls, value: object) -> dict[str, object]:
+		if not isinstance(value, dict):
+			return {}
+
+		normalized: dict[str, object] = {
+			"summary": (
+				value.get("summary", "")
+				if isinstance(value.get("summary", ""), str)
+				else ""
+			),
+		}
+		for section in ("strengths", "recommendations", "caveats"):
+			section_value = value.get(section, [])
+			normalized[section] = (
+				[section_value]
+				if isinstance(section_value, str)
+				else [item for item in section_value if isinstance(item, str)]
+				if isinstance(section_value, list)
+				else []
+			)
+		return normalized

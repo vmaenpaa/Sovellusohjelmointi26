@@ -93,7 +93,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-08 — AI insights endpoint (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 92a47e3
 - **Demonstration:**
   1. **Do this:** With Ollama up and session history for the logged-in user, call `POST /ai/insights` in `/docs`.
   2. **Capture:** Screenshot of a successful response in `/docs`.
@@ -105,7 +105,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 ### S5-09 — Structured response parsing (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** From `/ai/insights` (or the Insights UI), show a parsed payload that includes `summary`, `strengths`, `recommendations`, and `caveats`.
@@ -113,8 +113,8 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
   3. **Must show:** All four structured fields present (not a single undifferentiated blob of prose only).
   4. **Must not show:** Tokens or another user’s insights.
   5. **Save as:** `docs/reports/images/sprint-05/s5-09-structured.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** AI now gives parsed answer, that has all four categories.
+- **Used AI?** Yes
 
 ### S5-10 — Timeouts and soft failure (Must)
 
