@@ -17,18 +17,18 @@ type InsightSectionProps = {
 };
 
 function InsightSection({ title, items, className }: InsightSectionProps) {
+	if (items.length === 0) {
+		return null;
+	}
+
 	return (
 		<section className={`insight-section ${className}`}>
 			<h3>{title}</h3>
-			{items.length > 0 ? (
-				<ul>
-					{items.map((item, index) => (
-						<li key={`${title}-${index}`}>{item}</li>
-					))}
-				</ul>
-			) : (
-				<p className="insight-empty">No items were returned for this section.</p>
-			)}
+			<ul>
+				{items.map((item, index) => (
+					<li key={`${title}-${index}`}>{item}</li>
+				))}
+			</ul>
 		</section>
 	);
 }
@@ -37,10 +37,10 @@ function InsightResult({ result }: { result: InsightResponse }) {
 	return (
 		<section className="insights-result">
 			<h2>Your coaching insight</h2>
-			<div className="insight-summary">
+			<section className="insight-summary">
 				<h3>Summary</h3>
 				<p>{result.summary || "No summary was returned."}</p>
-			</div>
+			</section>
 			<div className="insight-sections">
 				<InsightSection
 					title="Strengths"

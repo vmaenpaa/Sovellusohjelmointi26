@@ -159,7 +159,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 
 ### S5-13 — Render structured insight (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Generate an insight on the Insights page so all four fields render.
@@ -167,8 +167,8 @@ Fill this block only if you did the cache stretch (otherwise skip).
   3. **Must show:** All four fields on the page (labels or clear sections).
   4. **Must not show:** Tokens; crop unrelated PII if needed.
   5. **Save as:** `docs/reports/images/sprint-05/s5-13-insights.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Insights page shows "summary", "strengths", "recommendations" and "caveats".
+- **Used AI?** Yes
 
 ### S5-14 — Loading and error UX (Must)
 
