@@ -170,6 +170,26 @@ export type StatsSummary = {
     by_activity_type: ActivityTypeStats[];
 };
 
+export type InsightRequest = {
+    period: "week" | "month";
+    focus?: string;
+};
+
+export type InsightResponse = {
+    summary: string;
+    strengths: string[];
+    recommendations: string[];
+    caveats: string[];
+};
+
+export function createInsight(body: InsightRequest) {
+    return apiRequest<InsightResponse>("/ai/insights", {
+    	method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify(body),
+    });
+}
+
 export function getProgress(filters: ProgressFilters) {
     const params = new URLSearchParams({ metric: filters.metric });
     if (filters.granularity) params.set("granularity", filters.granularity);

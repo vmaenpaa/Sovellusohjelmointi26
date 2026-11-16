@@ -1,0 +1,105 @@
+.insights-page {
+	max-width: 720px;
+	margin-inline: auto;
+}
+
+.insights-form {
+	margin: 24px 0;
+}
+
+.insights-form fieldset {
+	display: grid;
+	gap: 16px;
+	border: 0;
+	padding: 0;
+}
+
+.insights-form label {
+	display: grid;
+	gap: 6px;
+	color: #374151;
+	font-size: 13px;
+}
+
+.insights-form input,
+.insights-form select {
+	box-sizing: border-box;
+	min-height: 38px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	padding: 6px 8px;
+	font: inherit;
+}
+
+.insights-form button {
+	width: fit-content;
+	min-height: 38px;
+	border: 0;
+	border-radius: 6px;
+	padding: 0 16px;
+	background: #166534;
+	color: #ffffff;
+	font: inherit;
+	cursor: pointer;
+}
+
+.insights-form button:disabled {
+	cursor: wait;
+	opacity: 0.7;
+}
+
+.insights-result {
+	margin-top: 32px;
+}
+
+.insight-summary,
+.insight-section {
+	margin-top: 16px;
+	padding: 16px;
+	border-radius: 6px;
+	border: 1px solid #e5e7eb;
+	background: #ffffff;
+}
+
+.insight-summary {
+	border-left: 4px solid #166534;
+	background: #f0fdf4;
+}
+
+.insight-summary h3,
+.insight-section h3 {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.insight-summary p {
+	margin: 0;
+	line-height: 1.6;
+}
+
+.insight-section ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.insight-section li {
+	margin: 8px 0;
+	line-height: 1.5;
+}
+
+.insight-strengths {
+	border-left: 4px solid #2563eb;
+}
+
+.insight-recommendations {
+	border-left: 4px solid #d97706;
+}
+
+.insight-caveats {
+	border-left: 4px solid #6b7280;
+}
+
+.insight-empty {
+	margin: 0;
+	color: #6b7280;
+}

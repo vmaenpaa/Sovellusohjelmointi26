@@ -5,6 +5,7 @@ import { queryClient } from "./api/queryClient.ts";
 import ProtectedRoute from "./auth/ProtectedRoute.tsx";
 import CalendarPage from "./pages/CalendarPage.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
+import InsightsPage from "./pages/InsightsPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import PlanDetailPage from "./pages/PlanDetailPage.tsx";
 import PlansPage from "./pages/PlansPage.tsx";
@@ -28,6 +29,7 @@ ReactDOM.createRoot(root).render(
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/plans/:planId" element={<PlanDetailPage />} />
           <Route path="/progress" element={<ProgressPage />} />
+          <Route path="/insights" element={<InsightsPage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

@@ -133,7 +133,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 
 Fill this block only if you did the cache stretch (otherwise skip).
 
-- **Status:**
+- **Status:** Skip
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Show reuse of a cached insight vs a forced refresh (UI toggle, second identical request, or documented behavior).
@@ -146,7 +146,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 
 ### S5-12 — Insights page (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** While logged out, confirm Insights is gated. Log in and open the Insights page.
@@ -154,8 +154,8 @@ Fill this block only if you did the cache stretch (otherwise skip).
   3. **Must show:** Insights route available only when authenticated.
   4. **Must not show:** Tokens.
   5. **Save as:** `docs/reports/images/sprint-05/s5-12-insights-page.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Made insights page, so that user can now generate AI insight through the page.
+- **Used AI?** Yes
 
 ### S5-13 — Render structured insight (Must)
 
