@@ -48,6 +48,29 @@
 	opacity: 0.7;
 }
 
+.insights-loading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 12px 0;
+	color: #374151;
+}
+
+.insights-spinner {
+	width: 14px;
+	height: 14px;
+	border: 2px solid #bbf7d0;
+	border-top-color: #166534;
+	border-radius: 50%;
+	animation: insights-spin 0.8s linear infinite;
+}
+
+@keyframes insights-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .insights-result {
 	margin-top: 32px;
 }

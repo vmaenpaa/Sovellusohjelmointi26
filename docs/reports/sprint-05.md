@@ -172,7 +172,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 
 ### S5-14 — Loading and error UX (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Trigger a request and capture the loading state. Then capture the downtime/timeout error state on the Insights page (Ollama stopped).
@@ -180,8 +180,8 @@ Fill this block only if you did the cache stretch (otherwise skip).
   3. **Must show:** Distinct loading UX and a friendly error on the page (not a blank crash).
   4. **Must not show:** Tokens or raw exception dumps with secrets.
   5. **Save as:** `docs/reports/images/sprint-05/s5-14-loading-error.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Insights page has now loading state and error messages.
+- **Used AI?** Yes
 
 ### S5-15 — Ollama setup docs (Must)
 

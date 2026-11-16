@@ -62,6 +62,18 @@ function InsightResult({ result }: { result: InsightResponse }) {
 	);
 }
 
+function getInsightErrorMessage(error: unknown) {
+	const detail = error instanceof ApiError ? error.detail.trim() : "";
+	const providerMessage =
+		error instanceof ApiError && (error.status === 502 || error.status === 503)
+			? "Check that Ollama is running and try again later."
+			: "Check your connection and try again later.";
+
+	return detail
+		? `${detail} ${providerMessage}`
+		: `Could not generate insights. ${providerMessage}`;
+}
+
 export default function InsightsPage() {
 	const [period, setPeriod] = useState<InsightRequest["period"]>("week");
 	const [focus, setFocus] = useState("");
@@ -81,7 +93,11 @@ export default function InsightsPage() {
 			<h1>Insights</h1>
 			<p>Get coaching insights from your training data.</p>
 
-			<form className="insights-form" onSubmit={handleSubmit}>
+			<form
+				className="insights-form"
+				onSubmit={handleSubmit}
+				aria-busy={insight.isPending}
+			>
 				<fieldset disabled={insight.isPending}>
 					<label>
 						Period
@@ -111,13 +127,15 @@ export default function InsightsPage() {
 				</fieldset>
 			</form>
 
+			{insight.isPending && (
+				<p className="insights-loading" role="status" aria-live="polite">
+					<span className="insights-spinner" aria-hidden="true" />
+					Generating insights from your training data...
+				</p>
+			)}
 			{insight.isError && (
 				<ErrorBanner
-					message={
-						insight.error instanceof ApiError
-							? insight.error.detail
-							: "Could not generate insights."
-					}
+					message={getInsightErrorMessage(insight.error)}
 				/>
 			)}
 			{insight.data && (
