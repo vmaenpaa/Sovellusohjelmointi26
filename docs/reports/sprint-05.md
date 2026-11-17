@@ -4,10 +4,10 @@ Copy this file to `docs/reports/sprint-05.md` in **your** repo and fill the blan
 
 | Field | Your answer |
 | ----- | ----------- |
-| **Dates** | |
-| **Names** | |
-| **Repo URL** | |
-| **Branch** | |
+| **Dates** | 17.11.2026 |
+| **Names** | Ville Mäenpää |
+| **Repo URL** | https://github.com/vmaenpaa/Sovellusohjelmointi26 |
+| **Branch** | sprint-05 |
 
 Tickets: [sprint-05-tickets.md](../tickets/sprint-05-tickets.md) · Index: [../README.md](../README.md)
 
@@ -15,7 +15,7 @@ Tickets: [sprint-05-tickets.md](../tickets/sprint-05-tickets.md) · Index: [../R
 
 From the tickets: give users personalized feedback from local AI, with a clean path to a future cloud LLM. You are done when Ollama + history yields structured insight fields; downtime/timeout fails softly; a `CloudProvider` stub exists and `AI_PROVIDER` selects the provider; the Insights page renders results from **only** the logged-in user’s data; classmate-facing pull docs exist.
 
-In your words (2–3 sentences): did you meet that, and what is still rough?
+In your words (2–3 sentences): did you meet that, and what is still rough? Insights page exists and renders results from logged in user only. Documents for classmates also exists and tells exactly how to install and configure ollama.
 
 ## Tickets
 
@@ -119,7 +119,7 @@ Skip stretch tickets you did not do. Stretch: Status, PR, and Used AI? for each 
 ### S5-10 — Timeouts and soft failure (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** dc19e07
 - **Demonstration:**
   1. **Do this:** Stop Ollama (or force a timeout). Call Insights (`/docs` or UI) and confirm a clear error. Then open Sessions and/or Progress and confirm they still load.
   2. **Capture:** Screenshot of the Insights error **and** Sessions or Progress still working.
@@ -147,7 +147,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 ### S5-12 — Insights page (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** b54a13e
 - **Demonstration:**
   1. **Do this:** While logged out, confirm Insights is gated. Log in and open the Insights page.
   2. **Capture:** Screenshot of the auth-gated Insights page for the logged-in user.
@@ -160,7 +160,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 ### S5-13 — Render structured insight (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** f57e73a
 - **Demonstration:**
   1. **Do this:** Generate an insight on the Insights page so all four fields render.
   2. **Capture:** Screenshot of the page with `summary`, `strengths`, `recommendations`, and `caveats` visible.
@@ -173,7 +173,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 ### S5-14 — Loading and error UX (Must)
 
 - **Status:** Done
-- **PR / commit:**
+- **PR / commit:** 0a56b65
 - **Demonstration:**
   1. **Do this:** Trigger a request and capture the loading state. Then capture the downtime/timeout error state on the Insights page (Ollama stopped).
   2. **Capture:** Two screenshots (loading + error).
@@ -185,7 +185,7 @@ Fill this block only if you did the cache stretch (otherwise skip).
 
 ### S5-15 — Ollama setup docs (Must)
 
-- **Status:**
+- **Status:** Done
 - **PR / commit:**
 - **Demonstration:**
   1. **Do this:** Open the classmate-facing docs for installing Ollama, pulling a model, and setting URLs/env (`AI_PROVIDER`, Ollama base URL).
@@ -193,12 +193,12 @@ Fill this block only if you did the cache stretch (otherwise skip).
   3. **Must show:** Steps a classmate can follow without reading your source (`ollama pull`, ports/URLs).
   4. **Must not show:** Paid API keys (none should be required).
   5. **Save as:** `docs/reports/images/sprint-05/s5-15-ollama-docs.png`
-  6. **Caption (1–2 sentences):**
-- **Used AI?** Yes / No
+  6. **Caption (1–2 sentences):** Ollama setup, demo and problem solving documented.
+- **Used AI?** Yes
 
 ### S5-16 — Dashboard CTA to Insights (Should)
 
-- **Status:**
+- **Status:** Skip
 - **PR / commit:**
 - **Demonstration:** (only if you did this ticket)
   1. **Do this:** Open Dashboard and use the link/CTA to Insights; confirm navigation works.
@@ -253,15 +253,15 @@ Sprint 5 is **three weeks**.
 
 Two to four technical choices with why (for example timeout value, how you pack context, stub vs fake coaching).
 
-1.
-2.
+1. I used 30 second ollama timeout, but it is configurable in the .env file, this gives enough time for local model to generate answer.
+2. Ollama response is in packed in four different categories in JSON, so the response is predictable in frontend. 
 
 ## What we learned
 
 Note what you actually used. Tools this sprint: Ollama, `AIProvider` protocol, httpx (or equivalent), Compose profiles (optional), structured JSON insights.
 
-- What clicked:
-- One thing you would do differently:
+- What clicked: How to add AI to a application and configure ollama.
+- One thing you would do differently: Maybe possibility to choose AI model straight from the insights-page.
 
 ## Carry-over
 
@@ -275,12 +275,12 @@ Here, cover your **overall** AI use during this sprint (Cursor, ChatGPT, Copilot
 
 If you marked **No** on every ticket, write a short note that you did not use AI coding assistants this sprint (you may still answer verification / independence questions briefly).
 
-- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump):
-- **What I typically accepted from AI suggestions:**
-- **What I typically rejected or reworked, and why:**
-- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews):
-- **What I can now explain or do independently** that I relied on AI for earlier:
-- **Anything I would do differently with AI next sprint:**
+- **Where AI helped most this sprint** (themes, ticket IDs, or areas—not a ticket-by-ticket dump): AI helped most to build solid frame for multiple tickets and solve problems, if something did not work. 
+- **What I typically accepted from AI suggestions:** Functions created by AI.
+- **What I typically rejected or reworked, and why:** Some of the functions needed a little bit reworking and documentation often needed also quite much reworking.
+- **How I verified AI-assisted work** (tests, `/docs`, manual demos, reviews): Mainly through /docs or frontend, but also few tests.
+- **What I can now explain or do independently** that I relied on AI for earlier: Configuring ollama and building AI support for backend.
+- **Anything I would do differently with AI next sprint:** -
 
 Do not paste secrets, full JWTs, or `.env` values.
 

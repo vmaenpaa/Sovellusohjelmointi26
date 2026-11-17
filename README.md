@@ -176,6 +176,12 @@ Run on cmd:
 python3 -m pytest backend/app/tests/test_analytics.py
 ```
 
+## Ollama setup and Insights demos
+
+How to pull the model, configure host vs Docker URLs and troubleshoot failures, g to [Ollama setup](docs/ollama.md).
+
+The tested model is `mimo-v2.6`; it must match `OLLAMA_MODEL` in the root `.env` and [.env.example](.env.example).
+
 ## Note to self
 
 1. /register navigates to /login, does not auto-login.
